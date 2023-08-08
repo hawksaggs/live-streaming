@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const { Event } = require('../models');
-const ApiError = require('../utils/ApiError');
+const httpStatus = require("http-status");
+const {Event} = require("../models");
+const ApiError = require("../utils/ApiError");
 
 /**
  * Create a artefact
@@ -9,7 +9,7 @@ const ApiError = require('../utils/ApiError');
  */
 const getEvent = async (eventId) => {
     // add system defined fields
-    return Event.findOne({ _id: eventId });
+    return Event.findOne({_id: eventId});
 };
 const createEvent = async (eventBody) => {
     // add system defined fields
@@ -17,16 +17,16 @@ const createEvent = async (eventBody) => {
 };
 const updateEvent = async (eventId, eventBody) => {
     // add system defined fields
-    return Event.updateOne({ _id: eventId }, eventBody);
+    return Event.updateOne({_id: eventId}, eventBody);
 };
 const deleteEvent = async (eventId) => {
     // add system defined fields
-    return Event.deleteOne({ _id: eventId });
+    return Event.deleteOne({_id: eventId});
 };
 
 module.exports = {
     getEvent,
     createEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
 };

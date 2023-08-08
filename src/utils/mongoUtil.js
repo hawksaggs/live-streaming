@@ -2,7 +2,7 @@ const _ = require('lodash');
 const mongoose = require('mongoose');
 
 const convertToObjectId = (id) => {
-  return new mongoose.Types.ObjectId(id);
+    return new mongoose.Types.ObjectId(id);
 };
 
 /**
@@ -10,19 +10,19 @@ const convertToObjectId = (id) => {
  * @param {[string]} ids
  */
 const convertStringIdsToObjectIds = (ids) => {
-  return _.map(ids, function (id) {
-    return new mongoose.Types.ObjectId(id);
-  });
+    return _.map(ids, function (id) {
+        return new mongoose.Types.ObjectId(id);
+    });
 };
 
 const convertObjectIdsToStringIds = (ids) => {
-  return _.map(ids, function (id) {
-    return id.toString();
-  });
+    return _.map(ids, function (id) {
+        return id.toString();
+    });
 };
 
 module.exports = {
-  convertToObjectId,
-  convertStringIdsToObjectIds,
-  convertObjectIdsToStringIds,
+    convertToObjectId,
+    convertStringIdsToObjectIds,
+    convertObjectIdsToStringIds,
 };

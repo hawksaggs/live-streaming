@@ -1,43 +1,43 @@
-const mongoose = require('mongoose');
-const app = require('./app');
-const config = require('./config/config');
+const mongoose = require("mongoose");
+const app = require("./app");
+const config = require("./config");
 
 let server;
 mongoose
-  .connect(config.mongoose.url, config.mongoose.options)
-  .then(() => {
-    console.info('Connected to MongoDB');
+    .connect(config.mongoose.url, config.mongoose.options)
+    .then(() => {
+        console.info("Connected to MongoDB");
 
-    server = app.listen(config.port, () => {
-      console.info(`Listening to port ${config.port}`);
+        server = app.listen(config.port, () => {
+            console.info(`Listening to port ${config.port}`);
+        });
+    })
+    .catch((e) => {
+        console.error(e);
     });
-  })
-  .catch((e) => {
-    console.error(e);
-  });
 
 const exitHandler = () => {
-  if (server) {
-    server.close(() => {
-      console.info('Server closed');
-      process.exit(1);
-    });
-  } else {
-    process.exit(1);
-  }
+    if (server) {
+        server.close(() => {
+            console.info("Server closed");
+            process.exit(1);
+        });
+    } else {
+        process.exit(1);
+    }
 };
 
 const unexpectedErrorHandler = (error) => {
-  console.error(error);
-  exitHandler();
+    console.error(error);
+    exitHandler();
 };
 
-process.on('uncaughtException', unexpectedErrorHandler);
-process.on('unhandledRejection', unexpectedErrorHandler);
+process.on("uncaughtException", unexpectedErrorHandler);
+process.on("unhandledRejection", unexpectedErrorHandler);
 
-process.on('SIGTERM', () => {
-  console.info('SIGTERM received');
-  if (server) {
-    server.close();
-  }
+process.on("SIGTERM", () => {
+    console.info("SIGTERM received");
+    if (server) {
+        server.close();
+    }
 });
