@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+
+# Environment varibales
+.env*
+!.env*.example
+
+# Code coverage
+coverage
+
+# any uploads
+public/*
+
+.DS_Store
+package-lock.json
+.vscode
