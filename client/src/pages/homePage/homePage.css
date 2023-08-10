@@ -1,0 +1,615 @@
+.homepage_container .homepage_searchbox {
+  margin: 54px 0px 68px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.homepage_searchbox .searbox_input {
+  width: 600px;
+  height: 54px;
+  border-radius: 27px;
+  background: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.homepage_searchbox .searbox_input input {
+  background: #efefef;
+  border: none;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  width: 70%;
+}
+
+.homepage_searchbox .searbox_input input:focus-visible {
+  border: none;
+  outline: none;
+}
+
+.homepage_searchbox .search_icon {
+  position: absolute;
+  left: 22px;
+  width: 24px;
+}
+
+.homepage_container .homepage_slider {
+  width: 100%;
+  height: 585px;
+  background: #efefef;
+  padding: 50px 400px;
+}
+
+.homepage_slider .left_section .user_image_name {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+}
+
+.homepage_slider .left_section .user_image_name img {
+  width: 50px !important;
+}
+
+.homepage_slider .left_section .main_heading {
+  font-family: "Poppins";
+  font-size: 48px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin-top: 28px;
+}
+
+.homepage_slider .left_section .date_text {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin-top: 28px;
+}
+
+.homepage_slider .left_section .watch_btn {
+  width: 210px;
+  height: 64px;
+  border: none;
+  border-radius: 32px;
+  background: #ddb438;
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  color: #39331b;
+  text-align: center;
+  margin-top: 28px;
+}
+
+.homepage_slider .right_section img {
+  width: 315px;
+  height: 472px;
+}
+
+.homepage_container .upcoming_live_sec {
+  margin-bottom: 150px;
+  margin-right: 30px;
+}
+
+.homepage_container .heading_container {
+  margin: 180px 230px 60px 340px !important;
+}
+
+.homepage_container .upcoming_live_sec .heading,
+.homepage_container .trending_sec .heading,
+.recent_live_sec .heading,
+.our_product_sec .heading {
+  font-family: "Poppins";
+  font-size: 48px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+}
+
+.homepage_container .trending_sec {
+  margin-bottom: 60px;
+}
+
+.homepage_container .trending_sec .right_icon_container {
+  position: absolute;
+  right: 135px;
+  top: 300px;
+}
+
+.homepage_container .trending_sec p {
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  font-style: normal;
+  text-align: left;
+  color: #ddb438;
+}
+
+.trending_card_mini img {
+  width: 135px;
+  height: 195px;
+  object-fit: cover;
+  margin-right: 28px;
+}
+
+.trending_card_mini .desc {
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  color: #39331b;
+  width: 150px;
+}
+
+.trending_card_mini .price_1,
+.trending_card_mini .price_2 {
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  color: #ddb438;
+  margin-top: 10px;
+}
+
+.trending_card_mini .price_2 {
+  color: #39331b;
+  font-weight: 500;
+}
+
+.homepage_container .brand_name_card {
+  width: 315px;
+  height: 421px;
+  font-family: "Poppins";
+  font-size: 19px;
+  font-weight: 500;
+  font-style: normal;
+  color: #ddb438;
+}
+
+.homepage_container .brand_name_card p {
+  margin-bottom: 0px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.homepage_container .brand_name_card a {
+  text-decoration: none;
+  color: #ddb438;
+}
+
+.homepage_container .brand_name_card .middle_text {
+  font-size: 25px !important;
+  font-weight: normal !important;
+}
+
+.homepage_container .brand_name_card img {
+  width: 315px;
+  height: 330px;
+  object-position: top;
+  object-fit: cover;
+}
+
+.homepage_container .recent_live_sec .main_img {
+  width: 100%;
+  height: 338px;
+  object-fit: cover;
+}
+
+.homepage_container .recent_live_sec .recent_live_conatiner {
+  margin: 0px 344px;
+}
+
+.homepage_container .recent_live_sec .recent_live_conatiner .date_text {
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+}
+
+.homepage_container .recent_live_sec .recent_live_conatiner .heading_text {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin-top: 12px;
+}
+
+.homepage_container .recent_live_sec .recent_live_conatiner .desc_text {
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin-top: 12px;
+}
+
+.homepage_container .recent_live_sec .recent_live_conatiner .view_button button {
+  width: 180px;
+  height: 54px;
+  background: #ddb438;
+  border: none;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 20px;
+  border-radius: 0px;
+}
+
+.homepage_container .our_product_sec .our_product_sec_container {
+  margin: 0px 344px;
+}
+
+.homepage_container .our_product_sec .our_product_sec_container .our_brand_item img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+
+.homepage_container .our_product_sec .our_product_sec_container .our_brand_item p {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  color: #39331b;
+}
+
+.top_seller_sec {
+  margin-top: 100px;
+}
+
+.top_seller_sec .heading1 {
+  font-family: "Poppins";
+  font-size: 48px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #39331b;
+}
+
+.top_seller_sec .heading2 {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  margin-top: 8px;
+  color: #39331b;
+  margin-bottom: 40px;
+}
+
+.homepage_container .apk_btn_section {
+  margin: 130px 0px;
+}
+
+.homepage_container .apk_btn_section .heading_text {
+  font-family: "Poppins";
+  font-size: 48px;
+  font-weight: normal;
+  font-style: normal;
+  color: #39331b;
+}
+
+.homepage_container .apk_btn_section .details_sec .details_card {
+  width: 210px;
+}
+
+.homepage_container .apk_btn_section .details_sec .details_card .heading_text {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  color: #39331b;
+}
+
+.homepage_container .apk_btn_section .details_sec .details_card p {
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin-top: 18px;
+  margin-bottom: 0px;
+}
+
+.homepage_container .netikash_live_sec {
+  height: 585px;
+  background: #efefef;
+  margin: 100px 0px !important;
+}
+
+.homepage_container .netikash_live_sec .heading_text {
+  font-family: "Poppins";
+  font-size: 48px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+}
+
+.homepage_container .netikash_live_sec .desc_text {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin-top: 40px;
+}
+
+.homepage_container .netikash_live_sec .apply_now_link {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #ddb438;
+  margin-top: 46px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.homepage_container .netikash_live_sec img {
+  width: 583px;
+  height: 583px;
+  object-fit: cover;
+}
+
+.owl_carousel_home_1 .owl-nav .owl-prev {
+  position: absolute;
+  top: 260px;
+  left: 230px;
+}
+
+.owl_carousel_home_1 .owl-nav .owl-next {
+  position: absolute;
+  top: 260px;
+  right: 230px;
+}
+
+.owl_carousel_home_1 .owl-nav .owl-prev:hover,
+.owl_carousel_home_1 .owl-nav .owl-next:hover,
+.owl_carousel_home_2 .owl-nav .owl-prev:hover,
+.owl_carousel_home_2 .owl-nav .owl-next:hover,
+.owl_carousel_home_3 .owl-nav .owl-prev:hover,
+.owl_carousel_home_3 .owl-nav .owl-next:hover,
+.owl_carousel_upcoming .owl-nav .owl-prev:hover,
+.owl_carousel_upcoming .owl-nav .owl-next:hover {
+  background: transparent !important;
+}
+
+.owl_carousel_home_2 .owl-nav .owl-prev {
+  position: absolute;
+  top: 125px;
+  left: -175px;
+}
+
+.owl_carousel_home_2 .owl-nav .owl-next {
+  position: absolute;
+  top: 125px;
+  right: -175px;
+}
+
+.owl_carousel_home_3 .owl-nav .owl-prev {
+  position: absolute;
+  top: 75px;
+  left: -175px;
+}
+
+.owl_carousel_home_3 .owl-nav .owl-next {
+  position: absolute;
+  top: 75px;
+  right: -175px;
+}
+
+.owl_carousel_upcoming .owl-nav .owl-prev {
+  position: absolute;
+  top: -118px;
+  left: 230px;
+}
+
+.owl_carousel_upcoming .owl-nav .owl-next {
+  position: absolute;
+  top: -118px;
+  right: 230px;
+}
+
+@media(max-width:1024px) {
+  .top_seller_cards {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .homepage_container .homepage_slider {
+    padding: 24px 18px;
+    /* height: auto; */
+  }
+
+  .homepage_container .homepage_searchbox {
+    margin: 40px 18px;
+  }
+
+  .homepage_slider .left_section .main_heading {
+    font-size: 32px;
+  }
+
+  .homepage_slider .left_section .date_text,
+  .homepage_slider .left_section .user_image_name {
+    font-size: 20px;
+  }
+
+  .homepage_slider .left_section .watch_btn {
+    font-size: 18px;
+    width: 170px;
+    height: 46px;
+  }
+
+  .owl_carousel_home_1 .owl-nav .owl-prev,
+  .owl_carousel_home_1 .owl-nav .owl-next {
+    top: auto !important;
+    bottom: 18px;
+  }
+
+  .owl_carousel_upcoming .owl-nav .owl-prev,
+  .owl_carousel_upcoming .owl-nav .owl-next {
+    top: auto !important;
+    bottom: -8px;
+  }
+
+  .owl_carousel_upcoming .owl-nav .owl-prev {
+    left: 230px;
+  }
+
+  .homepage_container .heading_container {
+    margin: 60px 18px 32px 18px !important;
+  }
+
+  .homepage_container .upcoming_live_sec {
+    margin-bottom: 60px;
+    margin-right: 0px;
+  }
+
+  .homepage_container .upcoming_live_sec .heading,
+  .homepage_container .trending_sec .heading,
+  .recent_live_sec .heading,
+  .our_product_sec .heading {
+    font-size: 32px;
+  }
+
+  .homepage_container .trending_sec .right_icon_container {
+    position: relative;
+    top: auto;
+    right: -410px;
+    bottom: 550px;
+    width: fit-content;
+  }
+
+  .trending_card_mini {
+    width: 100%;
+  }
+
+  .trending_card_mini img {
+    width: 60%;
+    object-position: top;
+  }
+
+  .homepage_container .brand_name_card {
+    width: 100%;
+  }
+
+  .homepage_container .brand_name_card img {
+    width: 100%;
+  }
+
+  .homepage_container .recent_live_sec .recent_live_conatiner {
+    margin: 0px;
+  }
+
+  .owl_carousel_home_2 .owl-nav .owl-prev {
+    bottom: -6px;
+    left: 340px;
+    top: auto;
+  }
+
+  .owl_carousel_home_2 .owl-nav .owl-next {
+    bottom: -6px;
+    right: 55px;
+    top: auto;
+  }
+
+  .top_seller_sec .heading1 {
+    font-size: 32px;
+  }
+
+  .top_seller_sec .heading2 {
+    font-size: 20px;
+  }
+
+  .homepage_container .our_product_sec .our_product_sec_container {
+    margin: 0px;
+  }
+
+  .owl_carousel_home_3 .owl-nav .owl-prev {
+    top: auto;
+    left: 175px;
+    bottom: -100px;
+  }
+
+  .owl_carousel_home_3 .owl-nav .owl-next {
+    top: auto;
+    right: 175px;
+    bottom: -100px;
+  }
+
+  .homepage_container .apk_btn_section .heading_text {
+    margin-top: 32px;
+    font-size: 32px;
+    padding-left: 24px;
+  }
+
+  .homepage_container .apk_btn_section .details_sec .details_card .heading_text {
+    padding-left: 0px;
+  }
+
+  .homepage_container .apk_btn_section .details_sec .details_card {
+    padding-left: 24px;
+    width: 100%;
+  }
+
+  .homepage_container .apk_btn_section .details_sec .details_card p {
+    margin-top: 8px;
+  }
+
+  .homepage_container .apk_btn_section .ply_btn_sec {
+    flex-direction: row !important;
+    padding: 0px 24px !important;
+    justify-content: space-between !important;
+    margin-top: 24px !important;
+  }
+
+  .homepage_container .apk_btn_section .ply_btn_sec img {
+    width: 48%;
+  }
+
+  .homepage_container .netikash_live_sec .heading_text {
+    font-size: 36px;
+  }
+
+  .homepage_container .netikash_live_sec .desc_text {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  .homepage_container .netikash_live_sec .apply_now_link {
+    margin-top: 16px;
+    font-size: 20px;
+  }
+
+  .homepage_container .netikash_live_sec {
+    height: auto;
+    padding-bottom: 24px;
+  }
+}

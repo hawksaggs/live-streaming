@@ -1,0 +1,129 @@
+.top_seller_card .card_section {
+    width: 380px;
+    margin-right: 30px;
+    padding-bottom: 24px;
+}
+
+.top_seller_card .card_section .card_img {
+    width: 380px;
+    height: 584px;
+    object-fit: cover;
+}
+
+.top_seller_card .card_section .user_image_name {
+    font-family: "Poppins";
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    color: #707070;
+    margin-top: 18px;
+}
+
+.top_seller_card .card_section .desc {
+    font-family: "Poppins";
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 26px;
+    font-style: normal;
+    color: #707070;
+    margin: 12px 0px;
+}
+
+.top_seller_card .card_section .card_overlay {
+    width: 380px;
+    height: 584px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.224);
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.top_seller_card .view_prod {
+    width: 240px;
+    height: 45px;
+    background: #ddb438;
+    border: none;
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 0px;
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    transition: all 0.4s;
+    bottom: 16px;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.top_seller_card .card_section:hover {
+    cursor: pointer;
+}
+
+.top_seller_card .card_section:hover .view_prod {
+    opacity: 1;
+}
+
+.top_seller_card .card_section:hover .card_overlay {
+    opacity: 1;
+}
+
+.top_seller_card .price_text {
+    font-family: "Poppins";
+    font-size: 22px;
+    font-weight: 500;
+    font-style: normal;
+    color: #f2cb5c;
+}
+
+.top_seller_card .pill_section {
+    width: 75px;
+    height: 30px;
+    font-family: "Poppins";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 30px;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+}
+
+.top_seller_card .pill_section .pill.bk1 {
+    background: #f2cb5c;
+}
+
+.top_seller_card .pill_section .pill.bk2 {
+    background: #39331b;
+    margin-top: 16px;
+}
+
+@media(max-width: 600px) {
+    .top_seller_card{
+        width: 100%;
+    }
+
+    .top_seller_card .card_section{
+        width: 100%;
+        margin: 24px;
+        padding-bottom: 0px;
+        margin: 0px !important;
+        padding: 24px;
+    }
+
+    .top_seller_card .card_section .card_overlay{
+        width: 100%;
+    }
+
+    .top_seller_card .card_section .card_img{
+        width: 100%;
+    }
+}

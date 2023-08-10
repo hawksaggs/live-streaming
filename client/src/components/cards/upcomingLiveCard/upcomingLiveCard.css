@@ -1,0 +1,111 @@
+.upcoming_live_card .card_section {
+    width: 285px;
+    margin-left: 30px;
+}
+
+.upcoming_live_card .card_section .card_img {
+    width: 285px;
+    height: 427px;
+    object-fit: cover;
+}
+
+.upcoming_live_card .card_section .user_image_name {
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    color: #707070;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.upcoming_live_card .card_section .user_image_name img{
+    width: 60px;
+}
+
+.upcoming_live_card .card_section .desc {
+    font-family: "Poppins";
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 26px;
+    font-style: normal;
+    color: #707070;
+    margin: 12px 0px;
+}
+
+.upcoming_live_card .card_section .date_text {
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    color: #707070;
+}
+
+.upcoming_live_card .card_section .card_overlay {
+    width: 285px;
+    height: 427px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.224);
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.upcoming_live_card .card_section .quick_view_btn {
+    height: 54px;
+    background: #ddb438;
+    font-family: "Poppins";
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: center;
+    border: none;
+    border-radius: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    color: #ffffff;
+    z-index: 1000;
+    opacity: 0;
+    width: 100%;
+    transition: all 0.4s;
+}
+
+.upcoming_live_card .card_section:hover {
+    cursor: pointer;
+}
+
+.upcoming_live_card .card_section .quick_view_btn:hover {
+    opacity: 1;
+}
+
+.upcoming_live_card .card_section:hover .quick_view_btn {
+    opacity: 1;
+}
+
+.upcoming_live_card .card_section:hover .card_overlay {
+    opacity: 1;
+}
+
+@media(max-width: 600px) {
+    .upcoming_live_card {
+        width: 100%;
+    }
+
+    .upcoming_live_card .card_section {
+        margin-left: 0px;
+        width: 100%;
+        margin-bottom: 32px;
+        overflow: hidden;
+    }
+
+    .upcoming_live_card .card_section .card_img {
+        width: 100%;
+    }
+
+    .upcoming_live_card .card_section .card_overlay{
+        width: 100%;
+    }
+}

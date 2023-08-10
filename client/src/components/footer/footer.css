@@ -1,0 +1,58 @@
+.footer_container {
+    padding-bottom: 40px;
+}
+
+.footer_container .f_heading {
+    font-family: "Poppins";
+    font-size: 40px;
+    font-weight: normal;
+    line-height: 48px;
+    font-style: normal;
+    text-align: left;
+    color: #39331b;
+}
+
+.footer_container .f_heading span {
+    color: #ddb438;
+}
+
+.footer_container .footer_links a {
+    font-family: "Poppins";
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 48px;
+    font-style: normal;
+    text-align: left;
+    color: #39331b;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+.footer_container .apk_btn p {
+    font-family: "Poppins";
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 48px;
+    font-style: normal;
+    text-align: left;
+    color: #ddb438;
+}
+
+@media(max-width: 600px){
+
+    .footer_container .f_heading{
+        font-size: 34px;
+    }
+
+    .footer_container .footer_links a{
+        font-size: 20px;
+    }
+
+    .footer_container .apk_btn p{
+        font-size: 22px;
+    }
+
+    .footer_container .apk_btn img{
+        width: 180px;
+    }
+}

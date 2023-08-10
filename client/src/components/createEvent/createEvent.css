@@ -1,0 +1,191 @@
+.create_event_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.70;
+    background: #000000;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.5s;
+}
+
+.create_event_box {
+    width: 0px;
+    height: calc(100% - 75px);
+    opacity: 1;
+    background: #ffffff;
+    position: absolute;
+    top: 75px;
+    right: 0;
+    overflow: auto;
+    z-index: 2000;
+    transition: all 0.5s;
+}
+
+.create_event_box_show{
+    width: 1260px;
+}
+
+.create_event_box .event_heading {
+    padding: 32px 70px;
+    transition: all 5s;
+}
+
+.create_event_box .event_heading .title {
+    font-family: "Poppins";
+    font-size: 34px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #39331b;
+}
+
+.create_event_box .event_heading .desc {
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    color: #39331b;
+}
+
+.create_event_box .yellow_bk {
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddb438
+}
+
+.create_event_box .event_form {
+    background: #efefef;
+    width: 80%;
+    margin: 12px 0px 12px 40px;
+    padding: 24px 34px 40px 34px;
+    transition: all 5s;
+}
+
+.create_event_box .event_form .label_name {
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    color: #39331b;
+}
+
+.create_event_box .event_form .label_name_big {
+    font-size: 24px;
+}
+
+.create_event_box .event_form .select_image {
+    width: 180px;
+    height: 100px;
+    border-radius: 5px;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: #39331b;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.create_event_box .event_form .select_image img {
+    width: 180px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.create_event_box .event_form input,
+.create_event_box .event_form select {
+    border: none;
+    border-color: #707070;
+    border-width: 1px;
+    border-style: solid;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0px 16px;
+    font-family: "Poppins";
+}
+
+.create_event_box .mt_30 {
+    margin-top: 30px !important;
+}
+
+.create_event_box .event_form textarea {
+    height: 100px;
+    border: none;
+    border-color: #707070;
+    border-width: 1px;
+    border-style: solid;
+    width: 100%;
+    resize: none !important;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 0px 16px;
+    font-family: "Poppins";
+}
+
+.create_event_box .event_form .date_time_input input {
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+    color: #ddb438;
+}
+
+.create_event_box .event_form .btn_section button {
+    height: 50px;
+    border-radius: 5px;
+    background: #ddb438;
+    font-family: "Poppins";
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+    color: #ffffff;
+    border: none;
+    width: 100%;
+}
+
+.create_event_box .event_form .btn_section .cancel_btn {
+    background: #ffffff;
+    color: #39331b;
+}
+
+@media(max-width: 600px){
+
+    .event_form .product_images{
+        flex-direction: column;
+    }
+
+    .create_event_box .event_form .select_image{
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .create_event_box .event_heading{
+        padding: 24px;
+    }
+
+    .create_event_box .event_form{
+        margin: 0;
+        width: 100%;
+    }
+
+    .create_event_box{
+        width: 0%;
+        transition: 0.4s;
+    }
+
+    .create_event_box_show{
+        width: 100%;
+    }
+}

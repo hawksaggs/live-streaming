@@ -1,0 +1,181 @@
+.upcmg_home_card_container .upcmg_home_card {
+  width: 285px;
+  /* margin-right: 30px; */
+  border-radius: 5px;
+  overflow: hidden;
+  background: #efefef;
+}
+
+.upcmg_home_card_container .control_room_card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.upcmg_home_card_container .control_room_card .main_img {
+  width: 285px;
+  object-fit: cover;
+  height: 209px;
+}
+
+.control_room_card .detail_container {
+  background-color: #efefef;
+  width: 100%;
+  padding: 28px 20px 28px 50px;
+  height: 209px;
+}
+
+.more_options {
+  padding: 8px 20px 8px 6px;
+  background-color: white;
+  border-radius: 5px;
+  top: 38px;
+  right: 0px;
+}
+
+.more_options li p {
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  color: #39331b;
+}
+
+.upcmg_home_card_container .upcmg_home_card .main_img {
+  width: 285px;
+  object-fit: cover;
+  height: 209px;
+}
+
+.upcmg_home_card_container .image_content {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+
+.upcmg_home_card_container .image_content p {
+  font-family: "Poppins";
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+}
+
+.upcmg_home_card_container .image_content button {
+  width: 89px;
+  height: 21px;
+  border-radius: 5px;
+  border: none;
+  background: #ddb438;
+  font-family: "Poppins";
+  font-size: 10px;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upcmg_home_card_container .yellow_text p {
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: center;
+  color: #ddb438;
+}
+
+.upcmg_home_card_container .desc {
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin: 12px 0px;
+}
+
+.upcmg_home_card_container .image_content img {
+  width: 40px;
+}
+
+.upcmg_home_card_container .detail_container .detail_container_icon {
+  width: 16px;
+}
+
+.detail_container .control_room_card_desc {
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+}
+
+.upcmg_home_card_container .ctr_room_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.upcmg_home_card_container .ctr_room_btn button {
+  width: 191px;
+  height: 40px;
+  border-radius: 5px;
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  color: #ffffff;
+  background: #ddb438;
+  border: none;
+}
+
+@media (max-width: 600px) {
+  .upcmg_home_card_container .upcmg_home_card .main_img {
+    width: 100%;
+    object-fit: cover;
+    height: 280px;
+  }
+
+  .upcmg_home_card_container .upcmg_home_card {
+    width: 100%;
+  }
+
+  .upcmg_home_card_container .desc {
+    font-size: 16px;
+  }
+
+  .upcmg_home_card_container .yellow_text p {
+    font-size: 18px;
+  }
+
+  .upcmg_home_card_container .control_room_card {
+    width: 100%;
+    display: block;
+    align-items: center;
+  }
+  .control_room_card .detail_container {
+    background-color: #efefef;
+    width: 100%;
+    padding: 28px 20px 28px 28px;
+    min-height: 246px;
+  }
+  .upcmg_home_card_container .control_room_card .main_img {
+    object-fit: cover;
+    height: 374px;
+    width: 100%;
+  }
+}

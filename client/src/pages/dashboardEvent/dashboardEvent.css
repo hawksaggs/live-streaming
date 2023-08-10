@@ -1,0 +1,142 @@
+.event_details_view {
+  padding-left: 6.5%;
+  width: 65%;
+  /* height: 100vh;
+  overflow: auto; */
+}
+
+.event_details_view::-webkit-scrollbar {
+  display: none !important;
+}
+.event_searchbox {
+  margin-left: 28%;
+}
+.event_searchbox .searbox_input {
+  width: 390px;
+  height: 54px;
+  border-radius: 5px;
+  background: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.event_searchbox .searbox_input input {
+  background: #efefef;
+  border: none;
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  width: 70%;
+}
+
+.event_searchbox .searbox_input input:focus-visible {
+  border: none;
+  outline: none;
+}
+
+.event_searchbox .search_icon {
+  position: absolute;
+  left: 22px;
+  width: 24px;
+}
+
+.current_live_heading {
+  font-family: "Poppins";
+  font-size: 34px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+}
+
+.current_live_heading_wrapper {
+  padding: 0 18% !important;
+}
+
+.owl_carousel_current_live .owl-nav .owl-next:hover,
+.owl_carousel_current_live .owl-nav .owl-prev:hover {
+  background: transparent !important;
+}
+
+.owl_carousel_current_live .owl-nav .owl-next {
+  position: absolute;
+  top: 44%;
+  right: 0;
+}
+.owl_carousel_current_live .owl-nav .owl-prev {
+  position: absolute;
+  top: 44%;
+  left: 0;
+}
+
+.owl_carousel_current_live .owl-nav .owl-next img,
+.owl_carousel_current_live .owl-nav .owl-prev img {
+  height: 48px;
+  width: 48px;
+}
+
+.owl_carousel_current_live .owl-stage-outer {
+  margin: 0 18%;
+}
+
+.owl_carousel_current_live
+  .owl-stage-outer
+  .owl-stage
+  .owl-item
+  .carousel_item {
+  height: 395px;
+  width: 64%;
+}
+
+.carousel_item img {
+  background-repeat: no-repeat;
+}
+
+.carousel_item .play_btn_wrapper {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .event_details_view {
+    padding: 0 14px !important;
+    width: 100%;
+    height: auto;
+    overflow: auto;
+  }
+
+  .event_searchbox {
+    margin-left: 0%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .current_live_heading_wrapper {
+    padding: 0 0 15px 0% !important;
+  }
+  .owl_carousel_current_live .owl-nav .owl-prev {
+    display: none;
+  }
+  .owl_carousel_current_live .owl-stage-outer {
+    margin: 0;
+    margin-right: 18%;
+  }
+
+  .owl_carousel_current_live
+    .owl-stage-outer
+    .owl-stage
+    .owl-item
+    .carousel_item {
+    height: auto;
+    width: 82% !important;
+  }
+}

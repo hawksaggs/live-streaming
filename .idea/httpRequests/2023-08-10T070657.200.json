@@ -1,0 +1,12 @@
+{
+  "message": "Success",
+  "data": {
+    "_id": "64d43f39787e780c67c1b0dc",
+    "name": "Full Name",
+    "email": "test@test.com",
+    "password": "$2b$10$twNjPVIO6EgiKQcieuaQNeldQgK/qEQB47k7Y540jy04A2bI.Ynxu",
+    "createdAt": "2023-08-10T01:36:57.527Z",
+    "updatedAt": "2023-08-10T01:36:57.527Z",
+    "__v": 0
+  }
+}
