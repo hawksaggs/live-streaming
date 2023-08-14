@@ -8,9 +8,9 @@ import {
   LogOutIcon,
 } from "../../assets/icons";
 
-import ActiveEventIcon from "../../assets/icons/event_Icon.svg"
+import ActiveEventIcon from "../../assets/icons/event_Icon.svg";
 
-const Sidebar = ({ active }) => {
+const Sidebar = ({ active, logOut }) => {
   return (
     <div className="sidebar_container d-lg-flex d-none">
       <div className="link_conatiner">
@@ -22,7 +22,7 @@ const Sidebar = ({ active }) => {
         </div>
         <div className={`link_item ${active === 2 ? "active" : ""}`}>
           <Link to="/dashboard/event">
-            <img src={active === 2 ? ActiveEventIcon :EventIcon} alt="" />
+            <img src={active === 2 ? ActiveEventIcon : EventIcon} alt="" />
             <p>Event</p>
           </Link>
         </div>
@@ -34,7 +34,7 @@ const Sidebar = ({ active }) => {
         </div>
       </div>
 
-      <div className="logout_icon">
+      <div className="logout_icon" onClick={() => logOut()}>
         <div className="link_item d-flex align-items-center cursor_pointer">
           <img src={LogOutIcon} alt="" />
           <p>Log out</p>

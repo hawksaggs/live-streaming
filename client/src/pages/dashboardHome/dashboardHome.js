@@ -21,6 +21,7 @@ import CreateEvent from "../../components/createEvent/createEvent";
 import { useState, useEffect } from "react";
 import ControlRoom from "./controlRoom";
 import axios from "axios";
+import { history } from "../../helpers";
 
 let UpLiveImages = [
   image1,
@@ -36,7 +37,7 @@ let UpLiveImages = [
 let LearnHowImages = [image4, image5, image6, image4, image5, image6];
 
 const options1 = {
-  loop: true,
+  loop: false,
   center: false,
   item: 4,
   margin: 10,
@@ -66,42 +67,61 @@ const options2 = {
 };
 
 const DashboardHome = ({ controlRoom }) => {
+  console.log("controlRoom: ", controlRoom);
   const [events, setEvents] = useState([]);
+  const [eventToken, setEventToken] = useState(null);
+  const [controlRoomData, setControlRoomData] = useState(null);
   const [showEventForm, setShowEventForm] = useState(false);
   const [showControlRoom, setShowControlRoom] = useState(false);
-
   const [showVideoPopUp, setShowVideoPopUp] = useState(false);
 
-  const getEventLists = async () => {
-    let config = {
-      method: "GET",
-      url: process.env.REACT_APP_API_URL + "/v1/event",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
+  const logOut = () => {
+    localStorage.setItem("token", null);
+    localStorage.setItem("userId", null);
+    history.navigate("/login");
+  };
+  const getEvents = () => {
     axios
-      .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        setEvents(response.data.data);
+      .get(process.env.REACT_APP_API_URL + "/v1/event")
+      .then((response) => response.data)
+      .then((data) => {
+        console.log("data: ", data);
+        setEvents(data.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((err) => console.log);
+  };
+  const getEventToken = () => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/v1/meeting/token")
+      .then((response) => response.data)
+      .then((data) => {
+        console.log("data: ", data);
+        setEventToken(data.data);
+      })
+      .catch((err) => console.log);
   };
 
   useEffect(() => {
-    getEventLists();
+    const fetchData = async () => {
+      await getEvents();
+      await getEventToken();
+    };
+
+    fetchData();
   }, []);
+
+  console.log("events: ", events);
 
   return (
     <>
       <div className="d-flex">
-        <Sidebar active={showControlRoom ? "" : 1} />
+        <Sidebar active={showControlRoom ? "" : 1} logOut={logOut} />
         {showControlRoom ? (
-          <ControlRoom setShowControlRoom={setShowControlRoom} />
+          <ControlRoom
+            setShowControlRoom={setShowControlRoom}
+            data={controlRoomData}
+            eventToken={eventToken}
+          />
         ) : (
           <div className="d_home_container w-100 mb-5">
             <div className="top_heading d-flex align-items-center justify-content-between mb-5">
@@ -113,43 +133,48 @@ const DashboardHome = ({ controlRoom }) => {
               </div>
             </div>
 
-            <OwlCarousel className="owl-theme owl_carousel_1" {...options1}>
-              {events.map((v) => {
-                return (
-                  <UpcomingLiveHomePage
-                    controlRoom={controlRoom}
-                    setShowControlRoom={setShowControlRoom}
-                    data={v}
-                    key={v._id}
-                  />
-                );
-              })}
-            </OwlCarousel>
-
-            <div className="top_heading d-flex align-items-center justify-content-between my-5">
-              <div className="heading_name">
-                Learn how to get started Netikash Live.
-              </div>
-            </div>
-
-            <OwlCarousel
-              className="owl-theme owl_carousel_1 owl_carousel_2"
-              {...options2}
-            >
-              {LearnHowImages.map((v, i) => {
-                return (
-                  <div className="learn_img_container position-relative">
-                    <img
-                      src={VideoPlayIcon}
-                      className="video_icon"
-                      alt=""
-                      onClick={() => setShowVideoPopUp(true)}
+            {events.length ? (
+              <OwlCarousel className="owl-theme owl_carousel_1" {...options1}>
+                {events.map((v) => {
+                  console.log(v);
+                  return (
+                    <UpcomingLiveHomePage
+                      controlRoom={controlRoom}
+                      setShowControlRoom={setShowControlRoom}
+                      data={v}
+                      key={Math.random()}
+                      setControlRoomData={setControlRoomData}
+                      eventToken={eventToken}
                     />
-                    <img src={v} alt="" className="main_img" />
-                  </div>
-                );
-              })}
-            </OwlCarousel>
+                  );
+                })}
+              </OwlCarousel>
+            ) : null}
+
+            {/*<div className="top_heading d-flex align-items-center justify-content-between my-5">*/}
+            {/*  <div className="heading_name">*/}
+            {/*    Learn how to get started Netikash Live.*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+
+            {/*<OwlCarousel*/}
+            {/*  className="owl-theme owl_carousel_1 owl_carousel_2"*/}
+            {/*  {...options2}*/}
+            {/*>*/}
+            {/*  {LearnHowImages.map((v, i) => {*/}
+            {/*    return (*/}
+            {/*      <div className="learn_img_container position-relative">*/}
+            {/*        <img*/}
+            {/*          src={VideoPlayIcon}*/}
+            {/*          className="video_icon"*/}
+            {/*          alt=""*/}
+            {/*          onClick={() => setShowVideoPopUp(true)}*/}
+            {/*        />*/}
+            {/*        <img src={v} alt="" className="main_img" />*/}
+            {/*      </div>*/}
+            {/*    );*/}
+            {/*  })}*/}
+            {/*</OwlCarousel>*/}
           </div>
         )}
       </div>

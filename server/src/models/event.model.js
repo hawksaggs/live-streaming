@@ -1,37 +1,40 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const eventSchema = mongoose.Schema(
-    {
-        title: {
-            type: String,
-            required: true,
-        },
-        description: {
-            type: String,
-            required: true,
-        },
-        scheduledDate: {
-            type: String,
-            required: true,
-        },
-        scheduledTime: {
-            type: String,
-            required: true
-        },
-        price: {
-            type: Number,
-            required: true,
-        },
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    {
-        timestamps: true,
-        toJSON: {virtuals: true},
-    }
+    description: {
+      type: String,
+      required: true,
+    },
+    scheduledDate: {
+      type: String,
+      required: true,
+    },
+    scheduledTime: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    meetingId: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+    toJSON: { virtuals: true },
+  }
 );
 
 /**
  * @typedef Event
  */
-const Event = mongoose.model('Event', eventSchema);
+const Event = mongoose.model("Event", eventSchema);
 
 module.exports = Event;

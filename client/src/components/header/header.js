@@ -19,7 +19,7 @@ import { Button } from "react-bootstrap";
 import { useRef, useState } from "react";
 import useOutsideClick from "../outsideClick/outsideClick";
 
-const Header = ({ auth }) => {
+const Header = ({ auth, logOut }) => {
   const navigate = useNavigate();
 
   const [showDropdownLinks, setShowDropdownLinks] = useState(false);
@@ -50,10 +50,11 @@ const Header = ({ auth }) => {
             />
 
             <div
-              className={`${window.location.pathname === "/live-host"
-                ? "live_host_space_alignment"
-                : ""
-                } header_links d-flex align-items-center`}
+              className={`${
+                window.location.pathname === "/live-host"
+                  ? "live_host_space_alignment"
+                  : ""
+              } header_links d-flex align-items-center`}
             >
               {window.location.pathname === "/live-host" ? (
                 <>
@@ -122,7 +123,12 @@ const Header = ({ auth }) => {
                     </>
                   ) : (
                     <>
-                      <Link to="/dashboard/home/control-room" onClick={() => setShowMobileHeader(false)}>Discover</Link>
+                      <Link
+                        to="/dashboard/home/control-room"
+                        onClick={() => setShowMobileHeader(false)}
+                      >
+                        Discover
+                      </Link>
                       <Link to="#" className="bold_text_500">
                         Live Category
                       </Link>
@@ -183,18 +189,30 @@ const Header = ({ auth }) => {
                   <div className="drodown_box">
                     <div className="link_conatiner">
                       <div className={`link_item`}>
-                        <Link to="/dashboard/home/control-room" onClick={() => setShowDropdownLinks(false)}>
+                        <Link
+                          to="/dashboard/home/control-room"
+                          onClick={() => setShowDropdownLinks(false)}
+                        >
                           <img src={HomeIcon} alt="" />
                           <p>Home</p>
                         </Link>
                       </div>
-                      <div className={`link_item`} onClick={() => setShowDropdownLinks(false)}>
+                      <div
+                        className={`link_item`}
+                        onClick={() => setShowDropdownLinks(false)}
+                      >
                         <Link to="#">
                           <img src={SettingIcon} alt="" />
                           <p>Edit Profile</p>
                         </Link>
                       </div>
-                      <div className={`link_item`} onClick={() => setShowDropdownLinks(false)}>
+                      <div
+                        className={`link_item`}
+                        onClick={() => {
+                          setShowDropdownLinks(false);
+                          logOut();
+                        }}
+                      >
                         <Link to="/">
                           <img src={LogOutIcon} alt="" />
                           <p>Log Out</p>
@@ -210,8 +228,9 @@ const Header = ({ auth }) => {
               >
                 <img
                   src={DownYellowArrow}
-                  className={`cursor_pointer ${showDropdownLinks ? "rotate_img" : ""
-                    }`}
+                  className={`cursor_pointer ${
+                    showDropdownLinks ? "rotate_img" : ""
+                  }`}
                   alt=""
                 />
               </Link>
@@ -257,13 +276,19 @@ const Header = ({ auth }) => {
                   </div>
                   <div className="link_container">
                     <div className={`link_item`}>
-                      <Link to="/dashboard/home/control-room" onClick={() => setShowMobileHeader(false)}>
+                      <Link
+                        to="/dashboard/home/control-room"
+                        onClick={() => setShowMobileHeader(false)}
+                      >
                         <img src={HomeIcon} alt="" />
                         <p>Home</p>
                       </Link>
                     </div>
                     <div className={`link_item`}>
-                      <Link to="/dashboard/event" onClick={() => setShowMobileHeader(false)}>
+                      <Link
+                        to="/dashboard/event"
+                        onClick={() => setShowMobileHeader(false)}
+                      >
                         <img src={EventIcon} alt="" />
                         <p>Event</p>
                       </Link>

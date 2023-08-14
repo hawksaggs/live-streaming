@@ -20,8 +20,12 @@ const UpcomingLiveHomePage = ({
   controlRoom,
   setShowControlRoom,
   isControlRoomView,
-  events,
+  setControlRoomData,
+  eventToken,
 }) => {
+  {
+    console.log("UpcomingLiveHomePage: ", data);
+  }
   const [showMoreOpt, setShowMoreOpt] = useState(false);
   return (
     <div className="upcmg_home_card_container">
@@ -31,16 +35,16 @@ const UpcomingLiveHomePage = ({
         }`}
       >
         <div className="position-relative">
-          <img src="" alt="" className="main_img" />
+          {/*<img src="" alt="" className="main_img" />*/}
 
           <div className="image_content">
             <div className="d-flex justify-content-between align-items-center">
-              <Button>Scheduled</Button>
-              {!isControlRoomView && (
-                <img src={MoreItemIcon} alt="" className="cursor_pointer" />
-              )}
+              {/*<Button>Scheduled</Button>*/}
+              {/*{!isControlRoomView && (*/}
+              {/*  <img src={MoreItemIcon} alt="" className="cursor_pointer" />*/}
+              {/*)}*/}
             </div>
-            <p className="mb-0">Welcome to a Live Shopping Event</p>
+            {/*<p className="mb-0">Welcome to a Live Shopping Event</p>*/}
           </div>
         </div>
 
@@ -51,16 +55,19 @@ const UpcomingLiveHomePage = ({
               : "detail_container my-4 mx-3"
           }`}
         >
+          {console.log("isControlRoomView: ", isControlRoomView, data)}
           {isControlRoomView ? (
             <div className="d-flex justify-content-between position-relative">
               <div className="d-flex">
                 <div className="yellow_text d-flex align-items-center mb-2">
                   <img src={TimeIcon} alt="" width={16} />
-                  <p className="mb-0 ms-3">8:30 PM</p>
+                  <p className="mb-0 ms-3">{data.scheduledTime}</p>
                 </div>
                 <div className="yellow_text d-flex align-items-center mb-2 ms-4">
                   <img src={CalendarIcon} width={16} alt="" />
-                  <p className="mb-0 ms-3">Friday, July 29, 2022</p>
+                  <p className="mb-0 ms-3">
+                    {moment(data.scheduledDate).format("dddd, MMMM Do, YYYY")}
+                  </p>
                 </div>
               </div>
               <img
@@ -96,7 +103,7 @@ const UpcomingLiveHomePage = ({
                   alt=""
                 />
                 <p className="mb-0 ms-3">
-                  {moment(data.scheduledDate).format("dddd, MMMM Do YYYY")}
+                  {moment(data.scheduledDate).format("dddd, MMMM Do, YYYY")}
                 </p>
               </div>
               <div className="yellow_text d-flex align-items-center mb-2">
@@ -106,13 +113,10 @@ const UpcomingLiveHomePage = ({
                   width={16}
                   className="detail_container_icon"
                 />
-                <p className="mb-0 ms-3">
-                  {moment(data.scheduledTime).format("h:m A")}
-                </p>
+                <p className="mb-0 ms-3">{data.scheduledTime}</p>
               </div>
             </>
           )}
-
           <div
             className={`${
               isControlRoomView ? "control_room_card_desc mb-3 pt-1" : "desc"
@@ -120,11 +124,11 @@ const UpcomingLiveHomePage = ({
           >
             {data.description}
             {/*Sed ut perspiciatis unde omnis iste natus error{" "}*/}
-            {/*<br*/}
-            {/*  className={`${*/}
-            {/*    isControlRoomView ? "d-none d-md-block" : "d-none"*/}
-            {/*  }`}*/}
-            {/*/>{" "}*/}
+            <br
+              className={`${
+                isControlRoomView ? "d-none d-md-block" : "d-none"
+              }`}
+            />{" "}
             {/*sit voluptatem accusantium doloremque*/}
           </div>
           {/*<div className={`${isControlRoomView ? "d-flex" : ""}`}>*/}
@@ -152,11 +156,14 @@ const UpcomingLiveHomePage = ({
           {/*  </div>*/}
           {/*</div>*/}
         </div>
-
+        {console.log("controlRoom: ", data)}
         {controlRoom ? (
           <div
             className="ctr_room_btn"
-            onClick={() => setShowControlRoom(true)}
+            onClick={() => {
+              setShowControlRoom(true);
+              setControlRoomData(data);
+            }}
           >
             <Button>Control Room</Button>
           </div>

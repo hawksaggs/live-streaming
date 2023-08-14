@@ -1,15 +1,15 @@
 ### Register
-POST http://localhost:8000/v1/auth/register
+POST http://localhost:{{port}}/v1/auth/register
 Content-Type: application/json
 
 {
   "name": "Full Name",
-  "email": "test@test.com",
+  "email": "test3@test.com",
   "password": "password"
 }
 
 ### Login
-POST http://localhost:3000/v1/auth/login
+POST http://localhost:{{port}}/v1/auth/login
 Content-Type: application/json
 
 {
@@ -18,40 +18,48 @@ Content-Type: application/json
 }
 
 ### Create Event
-POST http://localhost:3000/v1/event
+POST http://localhost:{{port}}/v1/event
 Content-Type: application/json
 
 {
-  "title": "Title",
-  "description": "Description",
-  "type": "test",
-  "scheduledDateTime": "1691126943422",
-  "quantity": 1,
-  "productPrice": 100,
-  "salePrice": 80
+  "title": "test",
+  "description": "test",
+  "scheduledDate": "2023-08-19",
+  "scheduledTime": "12:03",
+  "price": "112"
 }
 
 ### Get Event List
-GET http://localhost:8000/v1/event
+GET http://localhost:{{port}}/v1/event
 Content-Type: application/json
 
 ### Get Event
-GET http://localhost:3000/v1/event/64cc8da34b1e68669b27a76c
+GET http://localhost:{{port}}/v1/event/64cc8da34b1e68669b27a76c
 Content-Type: application/json
 
 ### Update Event
-PUT http://localhost:3000/v1/event/64cc8da34b1e68669b27a76c
+PUT http://localhost:{{port}}/v1/event/64d43a07787e780c67c1af12
 Content-Type: application/json
 
 {
-  "title": "Title1",
-  "description": "Description1",
-  "type": "test",
-  "scheduledDateTime": "1691126943422",
-  "quantity": 1,
-  "productPrice": 100,
-  "salePrice": 80
+  "title": "test",
+  "description": "test",
+  "scheduledDate": "2023-08-19",
+  "scheduledTime": "12:03",
+  "price": "112"
 }
 
 ### Delete Event
-DELETE http://localhost:3000/v1/event/64cc8da34b1e68669b27a76c
+DELETE http://localhost:{{port}}/v1/event/64d996df1c731af833bcb827
+
+### Get Meeting Token
+GET http://localhost:{{port}}/v1/meeting/token
+
+### Create Room
+POST http://localhost:{{port}}/v1/meeting
+Content-Type: application/json
+
+{}
+
+### Validate Room
+GET http://localhost:{{port}}/v1/meeting/auqv-uhxc-0suu

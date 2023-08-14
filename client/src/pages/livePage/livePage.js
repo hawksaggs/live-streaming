@@ -28,7 +28,7 @@ function ParticipantView(props) {
         micRef.current
           .play()
           .catch((error) =>
-            console.error("videoElem.current.play() failed", error)
+            console.error("videoElem.current.play() failed", error),
           );
       } else {
         micRef.current.srcObject = null;
@@ -139,7 +139,7 @@ function SpeakerView() {
     const speakerParticipants = [...participants.values()].filter(
       (participant) => {
         return participant.mode == Constants.modes.CONFERENCE;
-      }
+      },
     );
     return speakerParticipants;
   }, [participants]);
@@ -233,7 +233,7 @@ const LivePage = () => {
         mode,
       }}
       joinWithoutUserInteraction
-      token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIzMWE4NjIwZC1jY2QwLTQzNGMtYjU3Zi0zNmI0ZjkwNjgxNTAiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY5MTY0OTQ2NSwiZXhwIjoxNjkxNzM1ODY1fQ.2SU-2KY3L5706Ssv21ex8haLyog6p1U6xRKpG37iaUc"
+      token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIzMWE4NjIwZC1jY2QwLTQzNGMtYjU3Zi0zNmI0ZjkwNjgxNTAiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sInZlcnNpb24iOjIsInJvbGVzIjpbIkNSQVdMRVIiXSwiaWF0IjoxNjkxODI0NzEyLCJleHAiOjE2OTE5MTExMTJ9.zFuBjTHi3pfOBILSJT3iGyLjAMlEavcr1cQDQg6mkHc"
     >
       {mode === Constants.modes.CONFERENCE ? <SpeakerView /> : <ViewerView />}
     </MeetingProvider>

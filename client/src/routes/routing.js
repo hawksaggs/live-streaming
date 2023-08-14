@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, create, Router } from "react-router-dom";
 import HomePage from "../pages/homePage/homePage";
 import DashboardHome from "../pages/dashboardHome/dashboardHome";
 import HostPage from "../pages/hostPage/hostPage";
@@ -6,6 +6,9 @@ import DashboardEvent from "../pages/dashboardEvent/dashboardEvent";
 import SignUpPage from "../pages/signup/signupPage";
 import LoginPage from "../pages/login/loginPage";
 import LivePage from "../pages/livePage/livePage";
+
+//history
+import { history } from "../helpers";
 
 function Routing() {
   return (
