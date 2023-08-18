@@ -39,6 +39,8 @@ import ourBrandImg4 from "../../assets/images/Image 25.jpg";
 import ourBrandImg5 from "../../assets/images/Image 26.jpg";
 import ourBrandImg6 from "../../assets/images/Image 27.jpg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const TredingCardMiniImages = [
   miniTrendImage1,
@@ -166,6 +168,40 @@ const TredingCardMini = ({ img }) => {
 };
 
 const HomePage = () => {
+  console.log("HomePage");
+  const [events, setEvents] = useState([]);
+  const [eventToken, setEventToken] = useState(null);
+  const getEvents = () => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/v1/event")
+      .then((response) => response.data)
+      .then((data) => {
+        console.log("data: ", data);
+        setEvents(data.data);
+      })
+      .catch((err) => console.log);
+  };
+  const getEventToken = () => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/v1/meeting/token")
+      .then((response) => response.data)
+      .then((data) => {
+        console.log("data: ", data);
+        setEventToken(data.data);
+      })
+      .catch((err) => console.log);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getEvents();
+      await getEventToken();
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("events: ", events);
   return (
     <div className="homepage_container">
       <div className="homepage_searchbox">
@@ -207,19 +243,18 @@ const HomePage = () => {
           {/* <img src={RightDarkIcon} className="cursor_pointer" alt="" /> */}
         </div>
 
-        <div className="d-flex align-items-center flex-wrap justify-content-lg-start justify-content-between mx-lg-0 mx-4">
-          <OwlCarousel
-            className="owl-theme owl_carousel_upcoming"
-            {...optionsUpcoming}
-          >
-            {upcomingCards.map((v, i) => {
-              return <UpcomingLiveCard data={v} key={i} />;
-            })}
-          </OwlCarousel>
-          {/* {upcomingCards.map((v, i) => {
-            return <UpcomingLiveCard data={v} key={i} />;
-          })} */}
-        </div>
+        {events?.length ? (
+          <div className="d-flex align-items-center flex-wrap justify-content-lg-start justify-content-between mx-lg-0 mx-4">
+            <OwlCarousel
+              className="owl-theme owl_carousel_upcoming"
+              {...optionsUpcoming}
+            >
+              {events.map((v, i) => {
+                return <UpcomingLiveCard data={v} key={i} />;
+              })}
+            </OwlCarousel>
+          </div>
+        ) : null}
       </div>
       <div className="trending_sec position-relative">
         <div className="d-flex align-items-center heading_container justify-content-between">

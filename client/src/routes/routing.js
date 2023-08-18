@@ -21,7 +21,7 @@ function Routing() {
           element={<DashboardHome controlRoom={true} />}
         />
         <Route path="/host" element={<HostPage />} />
-        <Route path="/guests" element={<HostPage guestsPage />} />
+        <Route path="/guests/:eventId" element={<HostPage guestsPage />} />
         <Route path="/dashboard/event" element={<DashboardEvent />} />
         <Route path="/register" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />

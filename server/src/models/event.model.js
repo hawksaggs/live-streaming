@@ -20,9 +20,11 @@ const eventSchema = mongoose.Schema(
     },
     price: {
       type: Number,
-      required: true,
     },
     meetingId: {
+      type: String,
+    },
+    image: {
       type: String,
     },
   },

@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utils/catchAsync");
 const {eventService} = require("../services");
+const fs = require("fs");
 
 const getAll = catchAsync(async (req, res) => {
     const events = await eventService.getAll();
@@ -15,7 +16,7 @@ const getEvent = catchAsync(async (req, res) => {
 });
 
 const createEvent = catchAsync(async (req, res) => {
-    const event = await eventService.createEvent(req.body);
+    const event = await eventService.createEvent({...req.body, image: req.file.filename});
     res.status(httpStatus.CREATED).send({message: "Success", data: event});
 });
 

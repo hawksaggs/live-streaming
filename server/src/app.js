@@ -5,15 +5,24 @@ const mongoSanitize = require('express-mongo-sanitize');
 const httpStatus = require('http-status');
 const cors = require('cors');
 const routes = require('./routes/v1');
-const {errorConverter, errorHandler} = require('./middlewares/error');
+const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
+const path = require('path');
 
 const app = express();
 
+//set static route
+app.use('/static', express.static(path.resolve('public')))
+
+const corsOptions = {
+    origin: '*'
+  }
+
 //set cors
-app.use(cors());
+app.use(cors(corsOptions));
 // set security HTTP headers
 app.use(helmet());
+
 
 // parse json request body
 app.use(

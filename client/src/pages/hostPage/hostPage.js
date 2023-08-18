@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./hostPage.css";
 import BackArrow from "../../assets/icons/left-arrow.svg";
 import SoundIcon from "../../assets/icons/sound.svg";
@@ -24,8 +25,75 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import ProductCard from "../../components/cards/productCard/productCard";
+import { isLoggedIn } from "../../helpers";
+import {
+  Constants,
+  MeetingProvider,
+  useMeeting,
+} from "@videosdk.live/react-sdk";
+import Hls from "hls.js";
+import axios from "axios";
+
+function ViewerView() {
+  // States to store downstream url and current HLS state
+  const playerRef = useRef(null);
+  //Getting the hlsUrls
+  const { hlsUrls, hlsState } = useMeeting();
+  //Playing the HLS stream when the downstreamUrl is present and it is playable
+  useEffect(() => {
+    if (hlsUrls.downstreamUrl && hlsState === "HLS_PLAYABLE") {
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          capLevelToPlayerSize: true,
+          maxLoadingDelay: 4,
+          minAutoBitrate: 0,
+          autoStartLoad: true,
+          defaultAudioCodec: "mp4a.40.2",
+        });
+        let player = document.querySelector("#hlsPlayer");
+        hls.loadSource(hlsUrls.downstreamUrl);
+        hls.attachMedia(player);
+      } else {
+        if (typeof playerRef.current?.play === "function") {
+          playerRef.current.src = hlsUrls.downstreamUrl;
+          playerRef.current.play();
+        }
+      }
+    }
+  }, [hlsUrls, hlsState, playerRef.current]);
+  return (
+    <div>
+      {/* Showing message if HLS is not started or is stopped by HOST */}
+      {hlsState !== "HLS_PLAYABLE" ? (
+        <div>
+          {/*<p>Please Click Go Live Button to start HLS</p>*/}
+          <p>Event will start shortly!!!</p>
+        </div>
+      ) : (
+        hlsState === "HLS_PLAYABLE" && (
+          <div>
+            <video
+              ref={playerRef}
+              id="hlsPlayer"
+              autoPlay={true}
+              controls
+              style={{ width: "100%", height: "100%" }}
+              playsInline
+              muted={true}
+              playing
+              onError={(err) => {
+                console.log(err, "hls video error");
+              }}
+            ></video>
+          </div>
+        )
+      )}
+    </div>
+  );
+}
 
 function HostPage({ guestsPage }) {
+  const { eventId } = useParams();
   const options = {
     loop: true,
     center: true,
@@ -84,6 +152,39 @@ function HostPage({ guestsPage }) {
 
   const mobile = window.screen.availWidth < 600;
 
+  console.log("Hostpage");
+  const [event, setEvent] = useState(null);
+  const [eventToken, setEventToken] = useState(null);
+  const getEvents = () => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/v1/event/" + eventId)
+      .then((response) => response.data)
+      .then((data) => {
+        console.log("data: ", data);
+        setEvent(data.data);
+      })
+      .catch((err) => console.log);
+  };
+  const getEventToken = () => {
+    axios
+      .get(process.env.REACT_APP_API_URL + "/v1/meeting/token")
+      .then((response) => response.data)
+      .then((data) => {
+        console.log("data: ", data);
+        setEventToken(data.data);
+      })
+      .catch((err) => console.log);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getEvents();
+      await getEventToken();
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="live_host_page">
       <div className="d-md-flex">
@@ -120,14 +221,32 @@ function HostPage({ guestsPage }) {
               />
             </div>
           </div>
-          <div className="banner_img">
-            <img
-              src={HostBanner}
-              height={mobile ? 400 : 632}
-              className="d-block w-100 mt-4 pt-3"
-              alt="banner"
-            />
-          </div>
+          { event && eventToken ? (
+              <div>
+                <MeetingProvider
+                    config={{
+                      meetingId: event.meetingId,
+                      micEnabled: false,
+                      webcamEnabled: false,
+                      name: "Ayush's Org",
+                      mode: Constants.modes.VIEWER,
+                    }}
+                    joinWithoutUserInteraction
+                    token={eventToken}
+                >
+                  <ViewerView />
+                </MeetingProvider>
+              </div>
+          ) : null }
+
+          {/*<div className="banner_img">*/}
+          {/*  <img*/}
+          {/*    src={HostBanner}*/}
+          {/*    height={mobile ? 400 : 632}*/}
+          {/*    className="d-block w-100 mt-4 pt-3"*/}
+          {/*    alt="banner"*/}
+          {/*  />*/}
+          {/*</div>*/}
         </div>
         <div className="d-flex flex-column justify-content-between mx-3 me-md-0 ms-md-5">
           <div className="top_right_text">

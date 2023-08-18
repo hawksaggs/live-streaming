@@ -30,7 +30,7 @@ function ViewerView() {
   const { hlsUrls, hlsState } = useMeeting();
   //Playing the HLS stream when the downstreamUrl is present and it is playable
   useEffect(() => {
-    if (hlsUrls.downstreamUrl && hlsState == "HLS_PLAYABLE") {
+    if (hlsUrls.downstreamUrl && hlsState === "HLS_PLAYABLE") {
       if (Hls.isSupported()) {
         const hls = new Hls({
           capLevelToPlayerSize: true,
@@ -53,13 +53,13 @@ function ViewerView() {
   return (
     <div>
       {/* Showing message if HLS is not started or is stopped by HOST */}
-      {hlsState != "HLS_PLAYABLE" ? (
+      {hlsState !== "HLS_PLAYABLE" ? (
         <div>
           {/*<p>Please Click Go Live Button to start HLS</p>*/}
           <p>Event will start shortly!!!</p>
         </div>
       ) : (
-        hlsState == "HLS_PLAYABLE" && (
+        hlsState === "HLS_PLAYABLE" && (
           <div>
             <video
               ref={playerRef}
@@ -67,7 +67,6 @@ function ViewerView() {
               autoPlay={true}
               controls
               style={{ width: "100%", height: "100%" }}
-              playsinline
               playsInline
               muted={true}
               playing
