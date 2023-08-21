@@ -10,18 +10,16 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
   const [description, setDescription] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
   const [scheduledTime, setScheduledTime] = useState("");
-  const [price, setPrice] = useState("");
   const [imageDetail, setImageDetail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
   function submitForm() {
-    console.log(title, description, scheduledDate, scheduledTime, price);
+    console.log(title, description, scheduledDate, scheduledTime);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("scheduledDate", scheduledDate);
     formData.append("scheduledTime", scheduledTime);
-    formData.append("price", price);
     formData.append("file", imageDetail);
     // let data = JSON.stringify({
     //   title: title,
@@ -158,19 +156,6 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
                   />
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="row m-0 mt_30">
-            <div className="col-lg-4 p-0">
-              <div className="label_name">Price</div>
-            </div>
-            <div className="col-lg-8 p-0 d-flex align-items-center justify-content-between">
-              <input
-                type="text"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
             </div>
           </div>
 

@@ -14,6 +14,9 @@ import CancelIcon from "../../../assets/icons/cancelIcon.svg";
 import sellerProfile from "../../../assets/images/seller_profile.png";
 import { useState } from "react";
 import moment from "moment";
+import { history, fetchWrapper } from "../../../helpers";
+
+const baseUrl = `${process.env.REACT_APP_API_URL}`;
 
 const UpcomingLiveHomePage = ({
   data,
@@ -22,11 +25,18 @@ const UpcomingLiveHomePage = ({
   isControlRoomView,
   setControlRoomData,
   eventToken,
+  setShowEventForm,
 }) => {
   {
     console.log("UpcomingLiveHomePage: ", data);
   }
   const [showMoreOpt, setShowMoreOpt] = useState(false);
+
+  const deleteEvent = async () => {
+    await fetchWrapper.delete(`${baseUrl}/v1/event/${data._id}`);
+    window.location.href = "/";
+  };
+
   return (
     <div className="upcmg_home_card_container">
       <div
@@ -35,7 +45,11 @@ const UpcomingLiveHomePage = ({
         }`}
       >
         <div className="position-relative">
-          <img src={`${process.env.REACT_APP_API_URL}/static/images/${data.image}`} alt="" className="main_img" />
+          <img
+            src={`${process.env.REACT_APP_API_URL}/static/images/${data.image}`}
+            alt=""
+            className="main_img"
+          />
 
           <div className="image_content">
             <div className="d-flex justify-content-between align-items-center">
@@ -78,7 +92,10 @@ const UpcomingLiveHomePage = ({
               />
               {showMoreOpt && (
                 <ul className="more_options position-absolute">
-                  <li className="d-flex align-items-center py-1 px-3 cursor_pointer">
+                  <li
+                    className="d-flex align-items-center py-1 px-3 cursor_pointer"
+                    onClick={() => setShowEventForm(true)}
+                  >
                     <img src={EarthIcon} alt="" height={12} width={12} />
                     <p className="m-0 ms-2">Public URL</p>
                   </li>
@@ -86,7 +103,10 @@ const UpcomingLiveHomePage = ({
                     <img src={EditIcon} alt="" height={12} width={12} />
                     <p className="m-0 ms-2">Edit</p>
                   </li>
-                  <li className="d-flex align-items-center py-1 px-3 cursor_pointer">
+                  <li
+                    className="d-flex align-items-center py-1 px-3 cursor_pointer"
+                    onClick={deleteEvent}
+                  >
                     <img src={CancelIcon} alt="" height={12} width={12} />
                     <p className="m-0 ms-2">Cancel</p>
                   </li>
