@@ -10,25 +10,32 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
   const [description, setDescription] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
   const [scheduledTime, setScheduledTime] = useState("");
-  const [price, setPrice] = useState("");
+  const [imageDetail, setImageDetail] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   function submitForm() {
-    console.log(title, description, scheduledDate, scheduledTime, price);
-    let data = JSON.stringify({
-      title: title,
-      description: description,
-      scheduledDate: scheduledDate,
-      scheduledTime: scheduledTime,
-      price: price,
-    });
+    console.log(title, description, scheduledDate, scheduledTime);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("scheduledDate", scheduledDate);
+    formData.append("scheduledTime", scheduledTime);
+    formData.append("file", imageDetail);
+    // let data = JSON.stringify({
+    //   title: title,
+    //   description: description,
+    //   scheduledDate: scheduledDate,
+    //   scheduledTime: scheduledTime,
+    //   price: price,
+    // });
 
     let config = {
       method: "POST",
       url: process.env.REACT_APP_API_URL + "/v1/event",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
+      data: formData,
     };
 
     axios
@@ -72,6 +79,35 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
         </div>
 
         <div className="event_form">
+          <div className="row m-0">
+            <div className="col-lg-4 p-0">
+              <div className="label_name label_name_big">Product image</div>
+            </div>
+            <div className="col-lg-8 p-0 d-flex align-items-center justify-content-between product_images">
+              <div className="w-100">
+                <label for="upload-photo" className="select_image">
+                  {imageUrl ? (
+                    <>
+                      <img src={imageUrl} alt="" />
+                    </>
+                  ) : (
+                    <>+</>
+                  )}
+                </label>
+                <input
+                  type="file"
+                  className="d-none"
+                  name="photo"
+                  id="upload-photo"
+                  onChange={(e) => {
+                    setImageDetail(e.target.files[0]);
+                    setImageUrl(URL.createObjectURL(e.target.files[0]));
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
           <div className="row m-0 mt_30">
             <div className="col-lg-4 p-0">
               <div className="label_name">Event Title/Name</div>
@@ -120,19 +156,6 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
                   />
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="row m-0 mt_30">
-            <div className="col-lg-4 p-0">
-              <div className="label_name">Price</div>
-            </div>
-            <div className="col-lg-8 p-0 d-flex align-items-center justify-content-between">
-              <input
-                type="text"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
             </div>
           </div>
 

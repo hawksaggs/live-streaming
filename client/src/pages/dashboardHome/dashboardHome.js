@@ -140,6 +140,7 @@ const DashboardHome = ({ controlRoom }) => {
                   return (
                     <UpcomingLiveHomePage
                       controlRoom={controlRoom}
+                      setShowEventForm={setShowEventForm}
                       setShowControlRoom={setShowControlRoom}
                       data={v}
                       key={Math.random()}
