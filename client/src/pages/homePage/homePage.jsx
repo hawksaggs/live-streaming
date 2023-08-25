@@ -101,7 +101,7 @@ const ourBrandProdImages = [
 ];
 
 const options1 = {
-  loop: true,
+  loop: false,
   center: true,
   item: 1,
   margin: 10,

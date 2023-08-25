@@ -25,72 +25,14 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import ProductCard from "../../components/cards/productCard/productCard";
-import { isLoggedIn } from "../../helpers";
 import {
   Constants,
   MeetingProvider,
   useMeeting,
+  usePubSub,
 } from "@videosdk.live/react-sdk";
 import Hls from "hls.js";
 import axios from "axios";
-
-function ViewerView() {
-  // States to store downstream url and current HLS state
-  const playerRef = useRef(null);
-  //Getting the hlsUrls
-  const { hlsUrls, hlsState } = useMeeting();
-  //Playing the HLS stream when the downstreamUrl is present and it is playable
-  useEffect(() => {
-    if (hlsUrls.downstreamUrl && hlsState === "HLS_PLAYABLE") {
-      if (Hls.isSupported()) {
-        const hls = new Hls({
-          capLevelToPlayerSize: true,
-          maxLoadingDelay: 4,
-          minAutoBitrate: 0,
-          autoStartLoad: true,
-          defaultAudioCodec: "mp4a.40.2",
-        });
-        let player = document.querySelector("#hlsPlayer");
-        hls.loadSource(hlsUrls.downstreamUrl);
-        hls.attachMedia(player);
-      } else {
-        if (typeof playerRef.current?.play === "function") {
-          playerRef.current.src = hlsUrls.downstreamUrl;
-          playerRef.current.play();
-        }
-      }
-    }
-  }, [hlsUrls, hlsState, playerRef.current]);
-  return (
-    <div>
-      {/* Showing message if HLS is not started or is stopped by HOST */}
-      {hlsState !== "HLS_PLAYABLE" ? (
-        <div>
-          {/*<p>Please Click Go Live Button to start HLS</p>*/}
-          <p>Event will start shortly!!!</p>
-        </div>
-      ) : (
-        hlsState === "HLS_PLAYABLE" && (
-          <div>
-            <video
-              ref={playerRef}
-              id="hlsPlayer"
-              autoPlay={true}
-              controls
-              style={{ width: "100%", height: "100%" }}
-              playsInline
-              muted={true}
-              playing
-              onError={(err) => {
-                console.log(err, "hls video error");
-              }}
-            ></video>
-          </div>
-        )
-      )}
-    </div>
-  );
-}
 
 function HostPage({ guestsPage }) {
   const { eventId } = useParams();
@@ -176,6 +118,17 @@ function HostPage({ guestsPage }) {
       .catch((err) => console.log);
   };
 
+  // State to store the user typed message
+  const [message, setMessage] = useState("");
+  const publishRef = useRef(null);
+
+  const handleSendMessage = () => {
+    // Sending the Message using the publish method
+    publishRef.current(message, { persist: true });
+    // Clearing the message input
+    setMessage("");
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       await getEvents();
@@ -221,23 +174,23 @@ function HostPage({ guestsPage }) {
               />
             </div>
           </div>
-          { event && eventToken ? (
-              <div>
-                <MeetingProvider
-                    config={{
-                      meetingId: event.meetingId,
-                      micEnabled: false,
-                      webcamEnabled: false,
-                      name: "Ayush's Org",
-                      mode: Constants.modes.VIEWER,
-                    }}
-                    joinWithoutUserInteraction
-                    token={eventToken}
-                >
-                  <ViewerView />
-                </MeetingProvider>
-              </div>
-          ) : null }
+          {event && eventToken ? (
+            <div>
+              <MeetingProvider
+                config={{
+                  meetingId: event.meetingId,
+                  micEnabled: false,
+                  webcamEnabled: false,
+                  name: "Ayush's Org",
+                  mode: Constants.modes.VIEWER,
+                }}
+                joinWithoutUserInteraction
+                token={eventToken}
+              >
+                <ViewerView  publishRef={publishRef}/>
+              </MeetingProvider>
+            </div>
+          ) : null}
 
           {/*<div className="banner_img">*/}
           {/*  <img*/}
@@ -295,9 +248,12 @@ function HostPage({ guestsPage }) {
               type="text"
               className="right_text_btn"
               placeholder="Add Comment"
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
             />
 
-            <img src={RightArrow} alt="" height={18} width={18} />
+            <img src={RightArrow} alt="" height={18} width={18}/>
           </div>
         </div>
       </div>
@@ -620,6 +576,72 @@ function HostPage({ guestsPage }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function ViewerView({ publishRef, messagesData }) {
+  // States to store downstream url and current HLS state
+  const playerRef = useRef(null);
+  //Getting the hlsUrls
+  const { hlsUrls, hlsState } = useMeeting();
+  // destructure publish method from usePubSub hook
+  const { publish, messages } = usePubSub("CHAT", {
+    onMessageReceived: (message) => {
+      window.alert(message.senderName + "says" + message.message);
+    },
+  });
+  console.log(publish)
+  publishRef.current = publish;
+  //Playing the HLS stream when the downstreamUrl is present and it is playable
+  useEffect(() => {
+    if (hlsUrls.downstreamUrl && hlsState === "HLS_PLAYABLE") {
+      if (Hls.isSupported()) {
+        const hls = new Hls({
+          capLevelToPlayerSize: true,
+          maxLoadingDelay: 4,
+          minAutoBitrate: 0,
+          autoStartLoad: true,
+          defaultAudioCodec: "mp4a.40.2",
+        });
+        let player = document.querySelector("#hlsPlayer");
+        hls.loadSource(hlsUrls.downstreamUrl);
+        hls.attachMedia(player);
+      } else {
+        if (typeof playerRef.current?.play === "function") {
+          playerRef.current.src = hlsUrls.downstreamUrl;
+          playerRef.current.play();
+        }
+      }
+    }
+  }, [hlsUrls, hlsState, playerRef.current]);
+  return (
+      <div>
+        {/* Showing message if HLS is not started or is stopped by HOST */}
+        {hlsState !== "HLS_PLAYABLE" ? (
+            <div>
+              {/*<p>Please Click Go Live Button to start HLS</p>*/}
+              <p>Event will start shortly!!!</p>
+            </div>
+        ) : (
+            hlsState === "HLS_PLAYABLE" && (
+                <div>
+                  <video
+                      ref={playerRef}
+                      id="hlsPlayer"
+                      autoPlay={true}
+                      controls
+                      style={{ width: "100%", height: "100%" }}
+                      playsInline
+                      muted={true}
+                      playing
+                      onError={(err) => {
+                        console.log(err, "hls video error");
+                      }}
+                  ></video>
+                </div>
+            )
+        )}
+      </div>
   );
 }
 
