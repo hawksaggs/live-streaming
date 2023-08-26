@@ -91,7 +91,14 @@
   color: #39331b;
   text-align: center;
   margin-top: 28px;
+  transition: all 0.3s ease-in-out;
 }
+
+.homepage_slider .left_section .watch_btn:hover, .homepage_slider .left_section .watch_btn:focus-visible, .homepage_slider .left_section .watch_btn:active, .homepage_slider .left_section .watch_btn:focus {
+  background-color: #372e17;
+  color: #fff !important;
+}
+
 
 .homepage_slider .right_section img {
   width: 315px;

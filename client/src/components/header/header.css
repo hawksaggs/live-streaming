@@ -131,6 +131,25 @@
 .header_dark_mobile_responsive {
   display: none;
 }
+.signUpbtn{
+  background-color: #694e02;
+  padding: 0px 32px 0px 0px;
+  text-align: center;
+  color: #fff !important;
+  /* line-height: 2; */
+  align-items: center;
+  border-radius: 25px;
+  position: relative;
+  /* top: 5px; */
+  height: 54px;
+  line-height: 50px;
+  font-size: 20px !important;
+  transition: all 0.3s ease-in-out;
+}
+.signUpbtn:hover{
+  background-color: #372e17;
+  color: #fff !important;
+}
 
 @media(max-width: 600px) {
 

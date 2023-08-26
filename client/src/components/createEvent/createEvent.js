@@ -5,30 +5,22 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const CreateEvent = ({ handleClose, showEventForm }) => {
+const CreateEvent = ({ handleClose, showEventForm , updateEventsList }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
   const [scheduledTime, setScheduledTime] = useState("");
   const [imageDetail, setImageDetail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [events, setEvents] = useState([]);
 
   function submitForm() {
-    console.log(title, description, scheduledDate, scheduledTime);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("scheduledDate", scheduledDate);
     formData.append("scheduledTime", scheduledTime);
     formData.append("file", imageDetail);
-    // let data = JSON.stringify({
-    //   title: title,
-    //   description: description,
-    //   scheduledDate: scheduledDate,
-    //   scheduledTime: scheduledTime,
-    //   price: price,
-    // });
-
     let config = {
       method: "POST",
       url: process.env.REACT_APP_API_URL + "/v1/event",
@@ -44,6 +36,19 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
         console.log(JSON.stringify(response.data));
         toast("Success");
         handleClose();
+        updateEventsList(response.data.data);
+
+        //pass the data to dashboard page
+        setEvents([...events, response.data.data]);
+
+        // clear the form
+        setTitle("");
+        setDescription("");
+        setScheduledDate("");
+        setScheduledTime("");
+        setImageDetail(null);
+        setImageUrl("");
+
       })
       .catch((error) => {
         console.log(error);
@@ -80,8 +85,8 @@ const CreateEvent = ({ handleClose, showEventForm }) => {
 
         <div className="event_form">
           <div className="row m-0">
-            <div className="col-lg-4 p-0">
-              <div className="label_name label_name_big">Product image</div>
+            <div className="col-lg-4 p-0 label_name_middle">
+              <div className="label_name">Event image</div>
             </div>
             <div className="col-lg-8 p-0 d-flex align-items-center justify-content-between product_images">
               <div className="w-100">

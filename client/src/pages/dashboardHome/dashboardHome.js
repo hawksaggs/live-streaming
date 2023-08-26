@@ -67,14 +67,16 @@ const options2 = {
 };
 
 const DashboardHome = ({ controlRoom }) => {
-  console.log("controlRoom: ", controlRoom);
+
+  const updateEventsList = (newEvent) => {
+    setEvents([...events, newEvent]);
+  };
   const [events, setEvents] = useState([]);
   const [eventToken, setEventToken] = useState(null);
   const [controlRoomData, setControlRoomData] = useState(null);
   const [showEventForm, setShowEventForm] = useState(false);
   const [showControlRoom, setShowControlRoom] = useState(false);
   const [showVideoPopUp, setShowVideoPopUp] = useState(false);
-
   const logOut = () => {
     localStorage.setItem("token", null);
     localStorage.setItem("userId", null);
@@ -85,7 +87,6 @@ const DashboardHome = ({ controlRoom }) => {
       .get(process.env.REACT_APP_API_URL + "/v1/event")
       .then((response) => response.data)
       .then((data) => {
-        console.log("data: ", data);
         setEvents(data.data);
       })
       .catch((err) => console.log);
@@ -95,7 +96,6 @@ const DashboardHome = ({ controlRoom }) => {
       .get(process.env.REACT_APP_API_URL + "/v1/meeting/token")
       .then((response) => response.data)
       .then((data) => {
-        console.log("data: ", data);
         setEventToken(data.data);
       })
       .catch((err) => console.log);
@@ -109,8 +109,6 @@ const DashboardHome = ({ controlRoom }) => {
 
     fetchData();
   }, []);
-
-  console.log("events: ", events);
 
   return (
     <>
@@ -136,7 +134,6 @@ const DashboardHome = ({ controlRoom }) => {
             {events.length ? (
               <OwlCarousel className="owl-theme owl_carousel_1" {...options1}>
                 {events.map((v) => {
-                  console.log(v);
                   return (
                     <UpcomingLiveHomePage
                       controlRoom={controlRoom}
@@ -151,31 +148,6 @@ const DashboardHome = ({ controlRoom }) => {
                 })}
               </OwlCarousel>
             ) : null}
-
-            {/*<div className="top_heading d-flex align-items-center justify-content-between my-5">*/}
-            {/*  <div className="heading_name">*/}
-            {/*    Learn how to get started Netikash Live.*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-
-            {/*<OwlCarousel*/}
-            {/*  className="owl-theme owl_carousel_1 owl_carousel_2"*/}
-            {/*  {...options2}*/}
-            {/*>*/}
-            {/*  {LearnHowImages.map((v, i) => {*/}
-            {/*    return (*/}
-            {/*      <div className="learn_img_container position-relative">*/}
-            {/*        <img*/}
-            {/*          src={VideoPlayIcon}*/}
-            {/*          className="video_icon"*/}
-            {/*          alt=""*/}
-            {/*          onClick={() => setShowVideoPopUp(true)}*/}
-            {/*        />*/}
-            {/*        <img src={v} alt="" className="main_img" />*/}
-            {/*      </div>*/}
-            {/*    );*/}
-            {/*  })}*/}
-            {/*</OwlCarousel>*/}
           </div>
         )}
       </div>
@@ -185,6 +157,7 @@ const DashboardHome = ({ controlRoom }) => {
       ) : null} */}
       <CreateEvent
         showEventForm={showEventForm}
+        updateEventsList={updateEventsList}
         handleClose={() => setShowEventForm(false)}
       />
 

@@ -75,9 +75,9 @@
     text-align: left;
     color: #39331b;
 }
-
-.create_event_box .event_form .label_name_big {
-    font-size: 24px;
+.create_event_box .event_form .label_name_middle {
+    display: flex;
+    align-items: center;
 }
 
 .create_event_box .event_form .select_image {

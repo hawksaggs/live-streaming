@@ -73,7 +73,10 @@
 .top_seller_card .card_section:hover .card_overlay {
     opacity: 1;
 }
-
+.top_seller_card .view_prod:hover, .top_seller_card .view_prod:focus, .top_seller_card .view_prod:active{
+    background-color: #372e17;
+    color: #fff !important;
+}
 .top_seller_card .price_text {
     font-family: "Poppins";
     font-size: 22px;

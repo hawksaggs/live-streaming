@@ -64,7 +64,7 @@ const Header = ({ auth, logOut }) => {
                 </>
               ) : (
                 <>
-                  <Link to="/dashboard/home/control-room">Discover</Link>
+                  <Link to="#">Discover</Link>
                   <Link to="#" className="bold_text_500">
                     Live Category
                   </Link>
@@ -84,7 +84,7 @@ const Header = ({ auth, logOut }) => {
               ) : (
                 <>
                   <Link to="/login">Log in</Link>
-                  <Link to="/register">Sign Up</Link>
+                  <Link to="/register" className="signUpbtn">Sign Up</Link>
                   {/*<Button>Sign Up</Button>{" "}*/}
                 </>
               )}
@@ -124,7 +124,7 @@ const Header = ({ auth, logOut }) => {
                   ) : (
                     <>
                       <Link
-                        to="/dashboard/home/control-room"
+                        to="#"
                         onClick={() => setShowMobileHeader(false)}
                       >
                         Discover

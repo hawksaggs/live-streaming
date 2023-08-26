@@ -1,6 +1,7 @@
 import { Route, Routes, create, Router } from "react-router-dom";
 import HomePage from "../pages/homePage/homePage";
 import DashboardHome from "../pages/dashboardHome/dashboardHome";
+// import HostPage from "../pages/hostPage/hostPage";
 import HostPage from "../pages/hostPage/hostPage";
 import DashboardEvent from "../pages/dashboardEvent/dashboardEvent";
 import SignUpPage from "../pages/signup/signupPage";
@@ -20,7 +21,7 @@ function Routing() {
           path="/dashboard/home/control-room"
           element={<DashboardHome controlRoom={true} />}
         />
-        <Route path="/host" element={<HostPage />} />
+         <Route path="/host" element={<HostPage />} />
         <Route path="/guests/:eventId" element={<HostPage guestsPage />} />
         <Route path="/dashboard/event" element={<DashboardEvent />} />
         <Route path="/register" element={<SignUpPage />} />

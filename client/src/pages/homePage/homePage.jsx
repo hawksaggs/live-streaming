@@ -271,7 +271,7 @@ const HomePage = () => {
           <img src={RightYellowIcon} alt="" />
           <p className="mb-0 mt-1">See All</p>
         </div>
-
+{/* 
         <div className="mini_treding_cards mt-lg-5">
           <div className="row m-0">
             <div className="col-lg-2 p-0"></div>
@@ -294,9 +294,9 @@ const HomePage = () => {
             </div>
             <div className="col-lg-2 p-0"></div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="recent_live_sec">
+      {/* <div className="recent_live_sec">
         <div className="d-flex align-items-center heading_container justify-content-between">
           <div className="heading">Recent Live</div>
         </div>
@@ -326,7 +326,7 @@ const HomePage = () => {
             ))}
           </OwlCarousel>
         </div>
-      </div>
+      </div> */}
       <div className="top_seller_sec">
         <div className="heading1">Top Seller</div>
         <div className="heading2">Top sale in this week. See & buy</div>

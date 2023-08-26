@@ -26,6 +26,7 @@ const { value: envVars, error } = envVarsSchema
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
+console.log(envVars.MONGODB_URL);
 
 module.exports = {
   // env: envVars.NODE_ENV,

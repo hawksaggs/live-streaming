@@ -65,7 +65,7 @@ function ViewerView() {
     <div>
       {/* Showing message if HLS is not started or is stopped by HOST */}
       {hlsState !== "HLS_PLAYABLE" ? (
-        <div>
+        <div className="guestEventDisplay">
           {/*<p>Please Click Go Live Button to start HLS</p>*/}
           <p>Event will start shortly!!!</p>
         </div>
@@ -311,7 +311,7 @@ function HostPage({ guestsPage }) {
             <p className="m-0 seller_bold_text">
               Custom Dress Modeling <br className="d-none d-md-block" /> Design
             </p>
-            <div className="gray_barcode d-flex justify-content-between">
+            {/* <div className="gray_barcode d-flex justify-content-between">
               <div>
                 <p className="m-0 heading mt-2">Buy before the show ends.</p>
                 <p className="m-0 para mt-2">
@@ -320,7 +320,7 @@ function HostPage({ guestsPage }) {
                 </p>
               </div>
               <img src={Barcode} alt="" />
-            </div>
+            </div> */}
 
             {/* carousel */}
             <div className="carousel_section mt-5 pt-4">
@@ -411,7 +411,7 @@ function HostPage({ guestsPage }) {
             />
             {guestsPage ? (
               <>
-                <div className="gray_barcode d-flex justify-content-between">
+                {/* <div className="gray_barcode d-flex justify-content-between">
                   <div>
                     <p className="m-0 heading mt-2">
                       Buy before the show ends.
@@ -422,7 +422,7 @@ function HostPage({ guestsPage }) {
                     </p>
                   </div>
                   <img src={Barcode} alt="" />
-                </div>
+                </div> */}
                 <div className="d-flex align-items-center mt-5">
                   <button className="counterBtn d-flex justify-content-between align-items-center">
                     <span
@@ -611,11 +611,11 @@ function HostPage({ guestsPage }) {
                 guestsPage={guestsPage}
               />
             </div>
-            <div className="d-flex justify-content-center">
+            {/* <div className="d-flex justify-content-center">
               <button type="button" className="add_product_btn">
                 Add Product
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

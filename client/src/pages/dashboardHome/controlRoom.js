@@ -17,8 +17,6 @@ import Hls from "hls.js";
 import { isLoggedIn } from "../../helpers";
 
 function ControlRoom({ setShowControlRoom, data, eventToken }) {
-  console.log("controlRoom data: ", data);
-  console.log("isLoggedIn: ", isLoggedIn());
   const [activeKey, setActiveKey] = useState(1);
   const [participantCount, setParticipantCount] = useState(0);
   const [reports, setReports] = useState([
@@ -76,7 +74,7 @@ function ControlRoom({ setShowControlRoom, data, eventToken }) {
               meetingId: data.meetingId,
               micEnabled: !!isLoggedIn(),
               webcamEnabled: !!isLoggedIn(),
-              name: "Ayush's Org",
+              // name: "Ayush's Org",
               mode: Constants.modes.CONFERENCE,
             }}
             joinWithoutUserInteraction
@@ -242,7 +240,7 @@ function ParticipantView(props) {
     }
   }, [micStream, micOn]);
   return (
-    <div>
+    <>
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />
       {webcamOn && (
         <ReactPlayer
@@ -253,21 +251,20 @@ function ParticipantView(props) {
           muted={true}
           playing={true}
           url={videoStream}
-          // height={"300px"}
-          // width={"300px"}
+          width="100%"
+          height="100%"
           onError={(err) => {
             console.log(err, "participant video error");
           }}
         />
       )}
-    </div>
+    </>
   );
 }
 
 function Controls() {
   const { hlsState, startHls, stopHls } = useMeeting();
   const _handleHLS = () => {
-    console.log("hlsState", hlsState);
     if (!hlsState || hlsState === "HLS_STOPPED") {
       startHls({
         layout: {
@@ -283,7 +280,7 @@ function Controls() {
     }
   };
   return (
-    <>
+    <div class="host-session-button">
       {hlsState === "HLS_STARTED" ||
       hlsState === "HLS_STOPPING" ||
       hlsState === "HLS_STARTING" ||
@@ -316,7 +313,7 @@ function Controls() {
           Go Live
         </button>
       )}
-    </>
+    </div>
   );
 }
 
@@ -326,11 +323,6 @@ function SpeakerView({ setParticipantCount }) {
   //We will also get the participant list to display all participants
   const { participants, meetingId, activeSpeakerId, localParticipant } =
     useMeeting();
-  console.log("meetingId: ", meetingId);
-  console.log("activeSpeakerId: ", activeSpeakerId);
-  console.log("participants: ", participants);
-  console.log("localParticipant: ", localParticipant);
-  console.log("participant size: ", participants.size);
   const mMeeting = useMeeting({
     onMeetingJoined: () => {
       setJoined("JOINED");
@@ -368,16 +360,17 @@ function SpeakerView({ setParticipantCount }) {
   }, [participants]);
   setParticipantCount(attendeesCount);
 
-  console.log("speaker: ", speaker);
   return (
-    <div className="container">
+    <div className="container remove-ext-host-cont-space">
       {joined && joined === "JOINED" ? (
         <div>
           <ParticipantView participantId={speaker.id} key={speaker.id} />
           <Controls />
         </div>
       ) : (
-        <p>Joining the meeting...</p>
+        <div className="host-display-area">
+          {/* <p>Session Will Start Soon ...</p> */}
+        </div>
       )}
     </div>
   );

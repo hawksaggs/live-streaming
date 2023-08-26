@@ -156,7 +156,9 @@ function SpeakerView() {
           <Controls />
         </div>
       ) : (
-        <p>Joining the meeting...</p>
+        <div className="host-display-area">
+         <p>All Items Are Checking Hold On...</p>
+        </div>
       )}
     </div>
   );
@@ -229,7 +231,7 @@ const LivePage = () => {
         meetingId: "4ioo-9ere-gf74",
         micEnabled: true,
         webcamEnabled: true,
-        name: "Ayush's Org",
+        // name: "Ayush's Org",
         mode,
       }}
       joinWithoutUserInteraction

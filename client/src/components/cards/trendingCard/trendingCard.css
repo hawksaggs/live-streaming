@@ -95,6 +95,12 @@
 .trending_card .card_section:hover .view_product_btn {
     opacity: 1;
 }
+.trending_card .view_product_btn button:hover {
+    cursor: pointer;
+    background-color: #372e17;
+    color: #fff !important;
+    transition: all 0.4s;
+}
 
 @media(max-width: 600px) {
     .trending_card{

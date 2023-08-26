@@ -45,12 +45,7 @@ const UpcomingLiveHomePage = ({
         }`}
       >
         <div className="position-relative">
-          <img
-            src={`${process.env.REACT_APP_API_URL}/static/images/${data.image}`}
-            alt=""
-            className="main_img"
-          />
-
+        <img src={`${process.env.REACT_APP_API_URL.replace('/api', '')}/static/images/${data?.image}`} className="main_img" alt=""/>
           <div className="image_content">
             <div className="d-flex justify-content-between align-items-center">
               {/*<Button>Scheduled</Button>*/}

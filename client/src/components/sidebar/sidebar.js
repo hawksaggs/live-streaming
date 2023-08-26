@@ -20,18 +20,18 @@ const Sidebar = ({ active, logOut }) => {
             <p>Home</p>
           </Link>
         </div>
-        <div className={`link_item ${active === 2 ? "active" : ""}`}>
+        {/* <div className={`link_item ${active === 2 ? "active" : ""}`}>
           <Link to="/dashboard/event">
             <img src={active === 2 ? ActiveEventIcon : EventIcon} alt="" />
             <p>Event</p>
           </Link>
-        </div>
-        <div className={`link_item ${active === 3 ? "active" : ""}`}>
+        </div> */}
+        {/* <div className={`link_item ${active === 3 ? "active" : ""}`}>
           <Link to="#">
             <img src={HelpIcon} alt="" />
             <p>Help</p>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="logout_icon" onClick={() => logOut()}>
