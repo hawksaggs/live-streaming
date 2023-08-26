@@ -36,6 +36,7 @@ import axios from "axios";
 
 function HostPage({ guestsPage }) {
   const { eventId } = useParams();
+  const mobile = window.screen.availWidth < 600;
   const options = {
     loop: true,
     center: true,
@@ -57,15 +58,9 @@ function HostPage({ guestsPage }) {
   };
 
   const carouselImages = [ClothProduct, CarouselImg, ClothProduct];
+
   const [currectActiveCarousel, setCurrentActiveCarousel] = useState("");
-
-  const handleCarouselAction = (currentImg) => {
-    setCurrentActiveCarousel(currentImg);
-    console.log(currentImg);
-  };
-
   const [quantity, setQuantity] = useState(5);
-
   const [productDetails, setProductDetails] = useState({
     productTitle: "HLA x FATE Mystery Box",
     description:
@@ -73,7 +68,6 @@ function HostPage({ guestsPage }) {
     quantity: 458,
     price: "980$",
   });
-
   const [imageDetail, setImageDetail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
@@ -83,6 +77,18 @@ function HostPage({ guestsPage }) {
   const [imageDetail3, setImageDetail3] = useState("");
   const [imageUrl3, setImageUrl3] = useState("");
 
+  const [event, setEvent] = useState(null);
+  const [eventToken, setEventToken] = useState(null);
+
+  // State to store the user typed message
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const publishRef = useRef(null);
+
+  const handleCarouselAction = (currentImg) => {
+    setCurrentActiveCarousel(currentImg);
+    console.log(currentImg);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
@@ -91,12 +97,6 @@ function HostPage({ guestsPage }) {
       [name]: value,
     });
   };
-
-  const mobile = window.screen.availWidth < 600;
-
-  console.log("Hostpage");
-  const [event, setEvent] = useState(null);
-  const [eventToken, setEventToken] = useState(null);
   const getEvents = () => {
     axios
       .get(process.env.REACT_APP_API_URL + "/v1/event/" + eventId)
@@ -117,11 +117,6 @@ function HostPage({ guestsPage }) {
       })
       .catch((err) => console.log);
   };
-
-  // State to store the user typed message
-  const [message, setMessage] = useState("");
-  const publishRef = useRef(null);
-
   const handleSendMessage = () => {
     // Sending the Message using the publish method
     publishRef.current(message, { persist: true });
@@ -137,6 +132,7 @@ function HostPage({ guestsPage }) {
 
     fetchData();
   }, []);
+  useEffect(() => {}, [messages]);
 
   return (
     <div className="live_host_page">
@@ -181,13 +177,13 @@ function HostPage({ guestsPage }) {
                   meetingId: event.meetingId,
                   micEnabled: false,
                   webcamEnabled: false,
-                  name: "Ayush's Org",
+                  name: "Org",
                   mode: Constants.modes.VIEWER,
                 }}
                 joinWithoutUserInteraction
                 token={eventToken}
               >
-                <ViewerView  publishRef={publishRef}/>
+                <ViewerView publishRef={publishRef} setMessages={setMessages} messages={messages}/>
               </MeetingProvider>
             </div>
           ) : null}
@@ -203,44 +199,14 @@ function HostPage({ guestsPage }) {
         </div>
         <div className="d-flex flex-column justify-content-between mx-3 me-md-0 ms-md-5">
           <div className="top_right_text">
-            <div>
-              <p className="m-0 upper_para">@Dorothy Freeman</p>
-              <p className="m-0 lower_para">Lorem ipsum dolor sit.</p>
-            </div>
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Doris Coleman</p>
-              <p className="m-0 lower_para">Lorem ipsum dolor sit.</p>
-            </div>
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Doris Coleman</p>
-              <p className="m-0 lower_para">Lorem ipsum dolor sit.</p>
-            </div>
-
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Tom Ortiz</p>
-              <p className="m-0 lower_para">
-                Lorem ipsum dolor sit Lorem ipsum
-              </p>
-            </div>
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Eliza Mendez</p>
-              <p className="m-0 lower_para">Lorem ipsum dolor sit.</p>
-            </div>
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Joe Gilbert</p>
-              <p className="m-0 lower_para">Lorem ipsum dolor sit.</p>
-            </div>
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Sara Miller</p>
-              <p className="m-0 lower_para">
-                Lorem ipsum dolor sit amet, <br /> consetetur sadipscing elitr,
-                sed diam
-              </p>
-            </div>
-            <div className="mt-4">
-              <p className="m-0 upper_para">@Joe Gilbert</p>
-              <p className="m-0 lower_para">Lorem ipsum dolor sit.</p>
-            </div>
+            {messages.map((message) => {
+              return (
+                <div className="mt-4">
+                  <p className="m-0 upper_para">@{message.senderId}</p>
+                  <p className="m-0 lower_para">{message.message}</p>
+                </div>
+              );
+            })}
           </div>
 
           <div className="add_cmt_box">
@@ -248,12 +214,19 @@ function HostPage({ guestsPage }) {
               type="text"
               className="right_text_btn"
               placeholder="Add Comment"
+              value={message}
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
             />
 
-            <img src={RightArrow} alt="" height={18} width={18}/>
+            <img
+              src={RightArrow}
+              alt=""
+              height={18}
+              width={18}
+              onClick={() => handleSendMessage()}
+            />
           </div>
         </div>
       </div>
@@ -579,19 +552,19 @@ function HostPage({ guestsPage }) {
   );
 }
 
-function ViewerView({ publishRef, messagesData }) {
+function ViewerView({ publishRef, messages , setMessages }) {
   // States to store downstream url and current HLS state
   const playerRef = useRef(null);
   //Getting the hlsUrls
   const { hlsUrls, hlsState } = useMeeting();
   // destructure publish method from usePubSub hook
-  const { publish, messages } = usePubSub("CHAT", {
+  const { publish, messages: chatMessages } = usePubSub("CHAT", {
     onMessageReceived: (message) => {
-      window.alert(message.senderName + "says" + message.message);
+      setMessages([...messages, message])
     },
   });
-  console.log(publish)
   publishRef.current = publish;
+  setMessages(chatMessages);
   //Playing the HLS stream when the downstreamUrl is present and it is playable
   useEffect(() => {
     if (hlsUrls.downstreamUrl && hlsState === "HLS_PLAYABLE") {
@@ -615,33 +588,33 @@ function ViewerView({ publishRef, messagesData }) {
     }
   }, [hlsUrls, hlsState, playerRef.current]);
   return (
-      <div>
-        {/* Showing message if HLS is not started or is stopped by HOST */}
-        {hlsState !== "HLS_PLAYABLE" ? (
-            <div>
-              {/*<p>Please Click Go Live Button to start HLS</p>*/}
-              <p>Event will start shortly!!!</p>
-            </div>
-        ) : (
-            hlsState === "HLS_PLAYABLE" && (
-                <div>
-                  <video
-                      ref={playerRef}
-                      id="hlsPlayer"
-                      autoPlay={true}
-                      controls
-                      style={{ width: "100%", height: "100%" }}
-                      playsInline
-                      muted={true}
-                      playing
-                      onError={(err) => {
-                        console.log(err, "hls video error");
-                      }}
-                  ></video>
-                </div>
-            )
-        )}
-      </div>
+    <div>
+      {/* Showing message if HLS is not started or is stopped by HOST */}
+      {hlsState !== "HLS_PLAYABLE" ? (
+        <div>
+          {/*<p>Please Click Go Live Button to start HLS</p>*/}
+          <p>Event will start shortly!!!</p>
+        </div>
+      ) : (
+        hlsState === "HLS_PLAYABLE" && (
+          <div>
+            <video
+              ref={playerRef}
+              id="hlsPlayer"
+              autoPlay={true}
+              controls
+              style={{ width: "100%", height: "100%" }}
+              playsInline
+              muted={true}
+              playing
+              onError={(err) => {
+                console.log(err, "hls video error");
+              }}
+            ></video>
+          </div>
+        )
+      )}
+    </div>
   );
 }
 

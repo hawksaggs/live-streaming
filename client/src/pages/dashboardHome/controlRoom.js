@@ -11,14 +11,14 @@ import {
   MeetingProvider,
   useMeeting,
   useParticipant,
+  usePubSub,
 } from "@videosdk.live/react-sdk";
 import ReactPlayer from "react-player";
 import Hls from "hls.js";
 import { isLoggedIn } from "../../helpers";
+import * as punycode from "punycode";
 
 function ControlRoom({ setShowControlRoom, data, eventToken }) {
-  console.log("controlRoom data: ", data);
-  console.log("isLoggedIn: ", isLoggedIn());
   const [activeKey, setActiveKey] = useState(1);
   const [participantCount, setParticipantCount] = useState(0);
   const [reports, setReports] = useState([
@@ -27,7 +27,19 @@ function ControlRoom({ setShowControlRoom, data, eventToken }) {
     { image: OrderIcon, counts: 56, category: "Order" },
     { image: SalesIcon, counts: 254, category: "Sales" },
   ]);
-  // useEffect(() => {}, [participantCount]);
+  // State to store the user typed message
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const publishRef = useRef(null);
+
+  const handleSendMessage = () => {
+    // Sending the Message using the publish method
+    publishRef.current(message, { persist: true });
+    // Clearing the message input
+    setMessage("");
+  };
+
+  useEffect(() => {}, [messages])
 
   return (
     <div className="d_home_container w-100 mb-5 d_home_container_height">
@@ -83,7 +95,12 @@ function ControlRoom({ setShowControlRoom, data, eventToken }) {
             token={eventToken}
           >
             {isLoggedIn() ? (
-              <SpeakerView setParticipantCount={setParticipantCount} />
+              <SpeakerView
+                setParticipantCount={setParticipantCount}
+                messages={messages}
+                publishRef={publishRef}
+                setMessages={setMessages}
+              />
             ) : (
               <ViewerView />
             )}
@@ -132,14 +149,30 @@ function ControlRoom({ setShowControlRoom, data, eventToken }) {
               Products
             </p>
           </div>
+          {messages.map((message) => {
+            return (
+                <div className="mt-4">
+                  <p className="m-0 upper_para">@{message.senderId}</p>
+                  <p className="m-0 lower_para">{message.message}</p>
+                </div>
+            );
+          })}
           <div className="d-flex justify-content-between">
             {/* <button className="button_add_comment">Add Comment</button> */}
+
             <input
               type="text"
               className="input_add_comment"
               placeholder="Add Comment"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
             />
-            <button className="button_add_comment">
+            <button
+              className="button_add_comment"
+              onClick={() => handleSendMessage()}
+            >
               <img
                 src={YellowArrow}
                 alt=""
@@ -214,7 +247,6 @@ function ViewerView() {
 }
 
 function ParticipantView(props) {
-  console.log("ParticipantView: ", props);
   const micRef = useRef(null);
   const { webcamStream, micStream, webcamOn, micOn, isLocal, displayName } =
     useParticipant(props.participantId);
@@ -320,17 +352,17 @@ function Controls() {
   );
 }
 
-function SpeakerView({ setParticipantCount }) {
+function SpeakerView({
+  setParticipantCount,
+  messages,
+  publishRef,
+  setMessages,
+}) {
   const [joined, setJoined] = useState(null);
   //Get the method which will be used to join the meeting.
   //We will also get the participant list to display all participants
   const { participants, meetingId, activeSpeakerId, localParticipant } =
     useMeeting();
-  console.log("meetingId: ", meetingId);
-  console.log("activeSpeakerId: ", activeSpeakerId);
-  console.log("participants: ", participants);
-  console.log("localParticipant: ", localParticipant);
-  console.log("participant size: ", participants.size);
   const mMeeting = useMeeting({
     onMeetingJoined: () => {
       setJoined("JOINED");
@@ -346,7 +378,14 @@ function SpeakerView({ setParticipantCount }) {
       console.log("onParticipantLeft: ", participant);
     },
   });
-  console.log("useMeeting: ", mMeeting);
+  const { publish, messages: chatMessages } = usePubSub("CHAT", {
+    onMessageReceived: (message) => {
+      setMessages([...messages, message]);
+    },
+  });
+  setMessages(chatMessages);
+  publishRef.current = publish;
+
   //We will create a ref to meeting object so that when used inside the
   //Callback functions, meeting state is maintained
   const mMeetingRef = useRef(mMeeting);
@@ -368,7 +407,6 @@ function SpeakerView({ setParticipantCount }) {
   }, [participants]);
   setParticipantCount(attendeesCount);
 
-  console.log("speaker: ", speaker);
   return (
     <div className="container">
       {joined && joined === "JOINED" ? (
