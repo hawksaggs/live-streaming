@@ -67,7 +67,6 @@ const options2 = {
 };
 
 const DashboardHome = ({ controlRoom }) => {
-
   const updateEventsList = (newEvent) => {
     setEvents([...events, newEvent]);
   };
@@ -84,7 +83,7 @@ const DashboardHome = ({ controlRoom }) => {
   };
   const getEvents = () => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/v1/event")
+      .get(process.env.REACT_APP_API_URL + "/v1/event/public")
       .then((response) => response.data)
       .then((data) => {
         setEvents(data.data);

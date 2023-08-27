@@ -30,31 +30,32 @@
 //     .catch((err) => next(err));
 // };
 
-const jwt = require('../utils/jwt')
+const jwt = require("../utils/jwt");
 
 const ignoreRoutes = [
-    "POST:/v1/auth/login",
-    "POST:/v1/auth/register",
-    "GET:/v1/events",
+  "POST:/v1/auth/login",
+  "POST:/v1/auth/register",
+  "GET:/v1/events",
+  "GET:/v1/meeting/token",
 ];
 
 const checkToken = async (req, res, next) => {
-    const { authorization } = req.headers;
-    if (ignoreRoutes.includes(`${req.method}:${req.path}`)) return next();
-    if (!authorization) return next(new Error("Invalid header"));
-    const authorizationHeader = authorization.split(" ");
-    if (authorizationHeader < 2) {
-        next(new Error("Invalid header"));
-    }
-    const token = authorizationHeader[1];
-    try {
-        await jwt.verifyToken(req, token);
-        next();
-    } catch (error) {
-        next(error);
-    }
+  const { authorization } = req.headers;
+  if (ignoreRoutes.includes(`${req.method}:${req.path}`)) return next();
+  if (!authorization) return next(new Error("Invalid header"));
+  const authorizationHeader = authorization.split(" ");
+  if (authorizationHeader < 2) {
+    next(new Error("Invalid header"));
+  }
+  const token = authorizationHeader[1];
+  try {
+    await jwt.verifyToken(req, token);
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
-    checkToken
-}
+  checkToken,
+};

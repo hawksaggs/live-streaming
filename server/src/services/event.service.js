@@ -3,6 +3,11 @@ const { Event } = require("../models");
 const ApiError = require("../utils/ApiError");
 const { createRoom } = require("./videosdk.service");
 
+const getpublicEvents = async () => {
+  // add system defined fields
+  return Event.find({});
+};
+
 const getAll = async (actor) => {
   // add system defined fields
   return Event.find({ user: actor.id });
@@ -36,4 +41,5 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  getpublicEvents
 };

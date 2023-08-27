@@ -1,7 +1,12 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utils/catchAsync");
 const { eventService } = require("../services");
-const fs = require("fs");
+
+const getpublicEvents = catchAsync(async (req, res) => {
+  const events = await eventService.getAll();
+
+  res.status(httpStatus.OK).send({ message: "Success", data: events });
+});
 
 const getAll = catchAsync(async (req, res) => {
   const user = req?.user;
@@ -51,4 +56,5 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
+  getpublicEvents
 };
