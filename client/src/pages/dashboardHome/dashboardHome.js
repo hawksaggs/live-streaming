@@ -119,6 +119,7 @@ const DashboardHome = ({ controlRoom }) => {
             setShowControlRoom={setShowControlRoom}
             data={controlRoomData}
             eventToken={eventToken}
+            setShowEventForm={setShowEventForm}
           />
         ) : (
           <div className="d_home_container w-100 mb-5">
@@ -157,6 +158,7 @@ const DashboardHome = ({ controlRoom }) => {
       ) : null} */}
       <CreateEvent
         showEventForm={showEventForm}
+        data={controlRoomData}
         updateEventsList={updateEventsList}
         handleClose={() => setShowEventForm(false)}
       />

@@ -18,7 +18,7 @@ import Hls from "hls.js";
 import { isLoggedIn } from "../../helpers";
 import * as punycode from "punycode";
 
-function ControlRoom({ setShowControlRoom, data, eventToken }) {
+function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm }) {
   const [activeKey, setActiveKey] = useState(1);
   const [participantCount, setParticipantCount] = useState(0);
   const [reports, setReports] = useState([
@@ -57,6 +57,7 @@ function ControlRoom({ setShowControlRoom, data, eventToken }) {
         isControlRoomView
         data={data}
         eventToken={eventToken}
+        setShowEventForm={setShowEventForm}
       />
 
       <div className="d-md-flex justify-content-between mt-4 pt-3">

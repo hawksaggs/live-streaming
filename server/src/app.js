@@ -8,6 +8,7 @@ const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
 const path = require('path');
+const auth = require("./middlewares/auth");
 
 const app = express();
 
@@ -34,6 +35,8 @@ app.use(
 // sanitize request data
 app.use(xss());
 app.use(mongoSanitize());
+
+app.use(auth.checkToken);
 
 
 // v1 api routes

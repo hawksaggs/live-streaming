@@ -3,27 +3,31 @@ const { Event } = require("../models");
 const ApiError = require("../utils/ApiError");
 const { createRoom } = require("./videosdk.service");
 
-const getAll = async () => {
+const getAll = async (actor) => {
   // add system defined fields
-  return Event.find({});
+  return Event.find({ user: actor.id });
 };
-const getEvent = async (eventId) => {
+const getEvent = async (actor, eventId) => {
   // add system defined fields
-  return Event.findOne({ _id: eventId });
+  return Event.findOne({ _id: eventId, user: actor.id });
 };
-const createEvent = async (eventBody) => {
+const createEvent = async (actor, eventBody) => {
   // add system defined fields
   const { roomId: meetingId } = await createRoom();
   eventBody.meetingId = meetingId;
+  eventBody.user = actor.id;
   return Event.create(eventBody);
 };
-const updateEvent = async (eventId, eventBody) => {
+const updateEvent = async (actor, eventId, eventBody) => {
+  // get event
+  const dbEvent = await this.getEvent(actor, eventId);
+  if (!dbEvent) throw new Error("Event not found");
   // add system defined fields
   return Event.updateOne({ _id: eventId }, eventBody);
 };
-const deleteEvent = async (eventId) => {
+const deleteEvent = async (actor, eventId) => {
   // add system defined fields
-  return Event.deleteOne({ _id: eventId });
+  return Event.deleteOne({ _id: eventId, user: actor.id });
 };
 
 module.exports = {

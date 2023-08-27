@@ -1,17 +1,31 @@
 import { Button } from "react-bootstrap";
 import { CrossIcon } from "../../assets/icons";
 import "./createEvent.css";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const CreateEvent = ({ handleClose, showEventForm , updateEventsList }) => {
+const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
   const [scheduledTime, setScheduledTime] = useState("");
   const [imageDetail, setImageDetail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  console.log('title: ', title)
+
+  useEffect(() => {
+    if (data) {
+      setTitle(data.title);
+      setDescription(data.description);
+      setScheduledDate(data.scheduledDate);
+      setScheduledTime(data.scheduledTime);
+      setIsUpdate(true);
+    }
+
+  }, [data]);
   const [events, setEvents] = useState([]);
 
   function submitForm() {
@@ -30,12 +44,18 @@ const CreateEvent = ({ handleClose, showEventForm , updateEventsList }) => {
       data: formData,
     };
 
+    if (isUpdate) {
+      config.url = process.env.REACT_APP_API_URL + "/v1/event/" + data._id;
+      config.method = "PUT"
+    }
+
     axios
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
         toast("Success");
         handleClose();
+        window.location.reload(true);
         updateEventsList(response.data.data);
 
         //pass the data to dashboard page

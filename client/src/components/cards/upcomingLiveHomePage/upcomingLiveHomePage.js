@@ -15,6 +15,8 @@ import sellerProfile from "../../../assets/images/seller_profile.png";
 import { useState } from "react";
 import moment from "moment";
 import { history, fetchWrapper } from "../../../helpers";
+import {useNavigate} from "react-router-dom";
+import CreateEvent from "../../createEvent/createEvent";
 
 const baseUrl = `${process.env.REACT_APP_API_URL}`;
 
@@ -27,14 +29,12 @@ const UpcomingLiveHomePage = ({
   eventToken,
   setShowEventForm,
 }) => {
-  {
-    console.log("UpcomingLiveHomePage: ", data);
-  }
+  const navigate = useNavigate();
   const [showMoreOpt, setShowMoreOpt] = useState(false);
 
   const deleteEvent = async () => {
     await fetchWrapper.delete(`${baseUrl}/v1/event/${data._id}`);
-    window.location.href = "/";
+    window.location.reload(true);
   };
 
   return (
@@ -89,12 +89,12 @@ const UpcomingLiveHomePage = ({
                 <ul className="more_options position-absolute">
                   <li
                     className="d-flex align-items-center py-1 px-3 cursor_pointer"
-                    onClick={() => setShowEventForm(true)}
+                    onClick={() => navigate('/guests/' + data.id)}
                   >
                     <img src={EarthIcon} alt="" height={12} width={12} />
                     <p className="m-0 ms-2">Public URL</p>
                   </li>
-                  <li className="d-flex align-items-center py-1 px-3 cursor_pointer">
+                  <li className="d-flex align-items-center py-1 px-3 cursor_pointer" onClick={() => setShowEventForm(true)}>
                     <img src={EditIcon} alt="" height={12} width={12} />
                     <p className="m-0 ms-2">Edit</p>
                   </li>
