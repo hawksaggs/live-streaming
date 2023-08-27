@@ -39,17 +39,11 @@ const updateEvent = catchAsync(async (req, res) => {
 
 const deleteEvent = catchAsync(async (req, res) => {
   const user = req?.user;
-<<<<<<< HEAD
-  await eventService.deleteEvent(user, req.params.eventId);
-=======
 
   await eventService.deleteEvent(user, req.params.eventId);
 
->>>>>>> 7a63b8351b771104a97d56f6e88d734f90ad898f
   res.status(httpStatus.OK).send({ message: "Success" });
 });
-
-
 
 module.exports = {
   getAll,
