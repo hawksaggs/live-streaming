@@ -20,7 +20,7 @@ const createEvent = async (actor, eventBody) => {
 };
 const updateEvent = async (actor, eventId, eventBody) => {
   // get event
-  const dbEvent = await this.getEvent(actor, eventId);
+  const dbEvent = await module.exports.getEvent(actor, eventId);
   if (!dbEvent) throw new Error("Event not found");
   // add system defined fields
   return Event.updateOne({ _id: eventId }, eventBody);

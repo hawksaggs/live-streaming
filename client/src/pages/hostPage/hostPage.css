@@ -5,30 +5,6 @@
   margin-top: 55px;
 }
 
-.live_host_page .top_right_text {
-  margin-top: 125px;
-}
-
-.top_right_text .upper_para {
-  font-family: "Poppins";
-  font-size: 18px;
-  line-height: 20px;
-  /* font-weight: 500; */
-  font-style: normal;
-  text-align: left;
-  color: #39331b;
-}
-
-.top_right_text .lower_para {
-  font-family: "Poppins";
-  font-size: 18px;
-  line-height: 20px;
-  font-weight: 500;
-  font-style: normal;
-  text-align: left;
-  color: #39331b;
-}
-
 .right_text_btn {
   background-color: #efefef;
   width: 100%;
@@ -44,6 +20,110 @@
   font-style: normal;
   color: #39331b;
 }
+.right_text_btn:focus{
+  outline: none;
+  outline: 1px solid #007bff;
+}
+
+
+
+/*chat box css */
+/* Styling for the chat container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 15px;
+}
+
+/* Styling for the messages container */
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  min-height: 525px;
+  overflow-y: auto;
+  max-height: 525px;
+  margin-top: 90px;
+}
+
+/* Styling for each message */
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Styling for even and odd messages */
+.message.even {
+  background-color: #f2f2f2;
+}
+
+.message.odd {
+  background-color: #e2f3ff;
+}
+
+/* Styling for the sender's name */
+.sender {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Styling for the message text */
+.message-text {
+  margin: 0;
+}
+
+/* Styling for the input container */
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Styling for the comment input */
+.comment-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Styling for the send button */
+.send-button {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Styling to hide default input and button styles */
+.comment-input, .send-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+}
+
+/* Scrollbar styling */
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+
+
+
+
 
 .live_host_page .bottom_section {
   margin: 120px 0 !important;
@@ -279,6 +359,9 @@
   padding: 0 20px;
 }
 
+
+
+
 /* .carousel_section .current_active_img {
   height: 429px;
   width: 764px;
@@ -325,6 +408,10 @@
 /* .owl_carousel_host_guest .owl-carousel .owl-stage-outer .owl-stage .owl-item{
   width: 74px !important;
 } */
+
+
+
+
 
 @media screen and (min-width: 1010px) and (max-width: 1150px) {
   /* .container {

@@ -122,6 +122,8 @@ function HostPage({ guestsPage }) {
     publishRef.current(message, { persist: true });
     // Clearing the message input
     setMessage("");
+    // scroll to bottom of the chat
+
   };
 
   useEffect(() => {
@@ -132,7 +134,11 @@ function HostPage({ guestsPage }) {
 
     fetchData();
   }, []);
-  useEffect(() => {}, [messages]);
+  useEffect(() => {
+    console.log("messages: ", messages);
+
+
+  }, [messages]);
 
   return (
     <div className="live_host_page">
@@ -197,7 +203,7 @@ function HostPage({ guestsPage }) {
           {/*  />*/}
           {/*</div>*/}
         </div>
-        <div className="d-flex flex-column justify-content-between mx-3 me-md-0 ms-md-5">
+        {/* <div className="d-flex flex-column justify-content-between mx-3 me-md-0 ms-md-5">
           <div className="top_right_text">
             {messages.map((message) => {
               return (
@@ -228,7 +234,38 @@ function HostPage({ guestsPage }) {
               onClick={() => handleSendMessage()}
             />
           </div>
-        </div>
+        </div> */}
+        <div className="chat-container">
+      <div className="messages-container">
+        {messages.map((message, index) => (
+          <div className={`message ${index % 2 === 0 ? "even" : "odd"}`} key={index}>
+            <p className="sender">@{message.senderId}</p>
+            <p className="message-text">{message.message}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="input-container">
+        <input
+          type="text"
+          className="right_text_btn"
+          placeholder="Add Comment"
+          value={message}
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+        />
+
+        <img
+          src={RightArrow}
+          alt="Send"
+          height={18}
+          width={18}
+          className="send-button"
+          onClick={() => handleSendMessage()}
+        />
+      </div>
+</div>
       </div>
       <div className="row m-0 bottom_section">
         <div className="col-md-6 ps-md-0 pe-md-5">
@@ -591,7 +628,7 @@ function ViewerView({ publishRef, messages , setMessages }) {
     <div>
       {/* Showing message if HLS is not started or is stopped by HOST */}
       {hlsState !== "HLS_PLAYABLE" ? (
-        <div>
+        <div className="guestEventDisplay">
           {/*<p>Please Click Go Live Button to start HLS</p>*/}
           <p>Event will start shortly!!!</p>
         </div>
