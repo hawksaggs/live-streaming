@@ -70,7 +70,7 @@ const UpcomingLiveHomePage = ({
               : "detail_container my-4 mx-3"
           }`}
         >
-          {console.log("isControlRoomView: ", isControlRoomView, data)}
+          {/* {console.log("isControlRoomView: ", isControlRoomView, data)} */}
           {isControlRoomView ? (
             <div className="d-flex justify-content-between position-relative">
               <div className="d-flex">
@@ -178,7 +178,7 @@ const UpcomingLiveHomePage = ({
           {/*  </div>*/}
           {/*</div>*/}
         </div>
-        {console.log("controlRoom: ", data)}
+        {/* {console.log("controlRoom: ", data)} */}
         {controlRoom ? (
           <div
             className="ctr_room_btn"

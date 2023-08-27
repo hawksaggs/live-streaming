@@ -135,7 +135,7 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
         </div>
 
         {/*Chat Box*/}
-        <div className="chat_product_box d-flex flex-column mt-5 mt-md-0 justify-content-between">
+        {/*   <div className="chat_product_box d-flex flex-column mt-5 mt-md-0 justify-content-between">
           <div className="d-flex">
             <p
               className={`m-0 option ${activeKey === 1 ? "active" : ""}`}
@@ -158,8 +158,8 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
                 </div>
             );
           })}
-          <div className="d-flex justify-content-between">
-            {/* <button className="button_add_comment">Add Comment</button> */}
+        <div className="d-flex justify-content-between">
+            {/* <button className="button_add_comment">Add Comment</button>}
 
             <input
               type="text"
@@ -183,7 +183,63 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
               />
             </button>
           </div>
-        </div>
+        </div> */}
+       
+       {/* new chat box */}
+       <div className="chat_product_box d-flex flex-column mt-5 mt-md-0 justify-content-between">
+  <div className="d-flex options">
+    <p
+      className={`m-0 option ${activeKey === 1 ? "active" : ""}`}
+      onClick={() => setActiveKey(1)}
+    >
+      Chat
+    </p>
+    <p
+      className={`m-0 option ms-4 ${activeKey === 2 ? "active" : ""}`}
+      onClick={() => setActiveKey(2)}
+    >
+      Products
+    </p>
+  </div>
+  
+  <div className="messages-container">
+    {messages.map((message, index) => (
+      <div className={`message ${index % 2 === 0 ? "even" : "odd"}`} key={index}>
+        <p className="upper_para">@{message.senderId}</p>
+        <p className="lower_para">{message.message}</p>
+      </div>
+    ))}
+  </div>
+  
+  <div className="d-flex align-items-center add-comment-section">
+    <input
+      type="text"
+      className="input_add_comment"
+      placeholder="Add Comment"
+      value={message}
+      onChange={(e) => {
+        setMessage(e.target.value);
+      }}
+    />
+    <button
+      className="button_add_comment"
+      onClick={() => handleSendMessage()}
+    >
+      <img
+        src={YellowArrow}
+        alt=""
+        style={{ transform: "rotate(270deg)" }}
+        height={11}
+        width={19}
+      />
+    </button>
+  </div>
+</div>
+
+
+
+
+
       </div>
     </div>
   );
@@ -315,7 +371,7 @@ function Controls() {
     }
   };
   return (
-    <div class="host-session-button">
+    <div className="host-session-button">
       {hlsState === "HLS_STARTED" ||
       hlsState === "HLS_STOPPING" ||
       hlsState === "HLS_STARTING" ||

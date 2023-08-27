@@ -295,6 +295,91 @@
   margin-top: 10px;
   position: relative;
 }
+
+/* chat css */
+.chat_product_box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.options {
+  margin-bottom: 20px;
+}
+
+.option {
+  cursor: pointer;
+  font-weight: bold;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.option.active {
+  color: #333;
+}
+
+.chat_product_box .messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  min-height: 525px;
+  overflow-y: auto;
+  max-height: 620px;
+  margin-top: -22px;
+}
+
+.message {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.chat_product_box .message.even {
+  background-color: #f7eed4;
+}
+
+.upper_para {
+  font-weight: bold;
+  margin: 0;
+}
+
+.lower_para {
+  margin: 0;
+}
+
+.add-comment-section {
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.input_add_comment {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.button_add_comment {
+  background-color: #f0c14b;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button_add_comment:hover {
+  background-color: #d1a037;
+}
+
+
+
 @media (max-width: 600px) {
   .d_home_container .top_heading .heading_name {
     font-size: 30px;

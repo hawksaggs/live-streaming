@@ -14,8 +14,6 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
   const [imageUrl, setImageUrl] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
 
-  console.log('title: ', title)
-
   useEffect(() => {
     if (data) {
       setTitle(data.title);
@@ -27,6 +25,10 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
 
   }, [data]);
   const [events, setEvents] = useState([]);
+
+
+
+
 
   function submitForm() {
     const formData = new FormData();
@@ -110,7 +112,7 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
             </div>
             <div className="col-lg-8 p-0 d-flex align-items-center justify-content-between product_images">
               <div className="w-100">
-                <label for="upload-photo" className="select_image">
+                <label htmlFor="upload-photo" className="select_image">
                   {imageUrl ? (
                     <>
                       <img src={imageUrl} alt="" />
