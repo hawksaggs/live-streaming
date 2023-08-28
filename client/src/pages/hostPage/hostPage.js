@@ -92,7 +92,6 @@ function HostPage({ guestsPage }) {
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setProductDetails({
       ...productDetails,
       [name]: value,
@@ -119,11 +118,8 @@ function HostPage({ guestsPage }) {
       .catch((err) => console.log);
   };
   const handleSendMessage = () => {
-    // Sending the Message using the publish method
     publishRef.current(message, { persist: true });
-    // Clearing the message input
     setMessage("");
-    // scroll to bottom of the chat
 
   };
 
@@ -135,17 +131,15 @@ function HostPage({ guestsPage }) {
 
     fetchData();
   }, []);
+
   useEffect(() => {
+
     scrollToBottom();
   }, [messages]);
 
   const handleSendMessageOnEnter = (e) => {
-
-
     if (e.key === 'Enter') {
-      // Sending the Message using the publish method
       publishRef.current(message, { persist: true });
-      // Clearing the message input
       setMessage("");
       scrollToBottom();
     }
@@ -624,6 +618,12 @@ function ViewerView({ publishRef, messages , setMessages }) {
   });
   publishRef.current = publish;
   setMessages(chatMessages);
+  
+  // i want to show the previous chat messages in the chat container first on page load
+
+
+
+
   //Playing the HLS stream when the downstreamUrl is present and it is playable
   useEffect(() => {
     if (hlsUrls.downstreamUrl && hlsState === "HLS_PLAYABLE") {
