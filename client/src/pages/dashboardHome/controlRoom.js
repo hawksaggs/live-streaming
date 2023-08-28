@@ -21,6 +21,7 @@ import * as punycode from "punycode";
 function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm }) {
   const [activeKey, setActiveKey] = useState(1);
   const [participantCount, setParticipantCount] = useState(0);
+  const chatContainerRef = useRef(null);
   const [reports, setReports] = useState([
     // { image: ViewerIcon, counts: participantCount, category: "Viewer" },
     { image: LikesIcon, counts: 458, category: "Likes" },
@@ -37,9 +38,35 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
     publishRef.current(message, { persist: true });
     // Clearing the message input
     setMessage("");
+    scrollToBottom();
   };
 
-  useEffect(() => {}, [messages])
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages])
+
+const handleSendMessageOnEnter = (e) => {
+
+
+  if (e.key === 'Enter') {
+    // Sending the Message using the publish method
+    publishRef.current(message, { persist: true });
+    // Clearing the message input
+    setMessage("");
+    scrollToBottom();
+  }
+};
+
+useEffect(() => {
+  scrollToBottom();
+}, [messages]);
+
+const scrollToBottom = () => {
+  if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  }
+};
+
 
   return (
     <div className="d_home_container w-100 mb-5 d_home_container_height">
@@ -202,7 +229,7 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
     </p>
   </div>
   
-  <div className="messages-container">
+  <div className="messages-container" ref={chatContainerRef}>
     {messages.map((message, index) => (
       <div className={`message ${index % 2 === 0 ? "even" : "odd"}`} key={index}>
         <p className="upper_para">@{message.senderId}</p>
@@ -220,6 +247,7 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
       onChange={(e) => {
         setMessage(e.target.value);
       }}
+      onKeyDown={handleSendMessageOnEnter}
     />
     <button
       className="button_add_comment"

@@ -36,6 +36,7 @@ import axios from "axios";
 
 function HostPage({ guestsPage }) {
   const { eventId } = useParams();
+  const chatContainerRef = useRef(null);
   const mobile = window.screen.availWidth < 600;
   const options = {
     loop: true,
@@ -135,10 +136,30 @@ function HostPage({ guestsPage }) {
     fetchData();
   }, []);
   useEffect(() => {
-    console.log("messages: ", messages);
-
-
+    scrollToBottom();
   }, [messages]);
+
+  const handleSendMessageOnEnter = (e) => {
+
+
+    if (e.key === 'Enter') {
+      // Sending the Message using the publish method
+      publishRef.current(message, { persist: true });
+      // Clearing the message input
+      setMessage("");
+      scrollToBottom();
+    }
+  };
+  
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
 
   return (
     <div className="live_host_page">
@@ -236,7 +257,7 @@ function HostPage({ guestsPage }) {
           </div>
         </div> */}
         <div className="chat-container">
-      <div className="messages-container">
+      <div className="messages-container" ref={chatContainerRef}>
         {messages.map((message, index) => (
           <div className={`message ${index % 2 === 0 ? "even" : "odd"}`} key={index}>
             <p className="sender">@{message.senderId}</p>
@@ -254,6 +275,7 @@ function HostPage({ guestsPage }) {
           onChange={(e) => {
             setMessage(e.target.value);
           }}
+          onKeyDown={handleSendMessageOnEnter}
         />
 
         <img

@@ -326,6 +326,7 @@
   width: 100%;
   min-height: 525px;
   overflow-y: auto;
+  height: 620px;
   max-height: 620px;
   margin-top: -22px;
 }
@@ -364,9 +365,9 @@
   margin-right: 10px;
 }
 
-.button_add_comment {
-  background-color: #f0c14b;
-  border: none;
+.chat_product_box .button_add_comment {
+  background-color: transparent;
+  border: 1px solid #f0c14b;
   color: #fff;
   border-radius: 4px;
   padding: 5px 10px;
