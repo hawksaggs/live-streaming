@@ -36,18 +36,23 @@ const ignoreRoutes = [
   "POST:/v1/auth/login",
   "POST:/v1/auth/register",
   "GET:/v1/events",
+  "GET:/v1/event",
   "GET:/v1/meeting/token",
+  "GET:/v1/event/public",
 ];
 
 const checkToken = async (req, res, next) => {
   const { authorization } = req.headers;
-  if (ignoreRoutes.includes(`${req.method}:${req.path}`)) return next();
+  if (ignoreRoutes.some((r) => `${req.method}:${req.path}`.match(r)))
+    return next();
+  // if (ignoreRoutes.includes(`${req.method}:${req.path}`)) return next();
   if (!authorization) return next(new Error("Invalid header"));
   const authorizationHeader = authorization.split(" ");
   if (authorizationHeader < 2) {
     next(new Error("Invalid header"));
   }
   const token = authorizationHeader[1];
+  if (!token) return next(new Error("Token required"));
   try {
     await jwt.verifyToken(req, token);
     next();

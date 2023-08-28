@@ -1,13 +1,7 @@
 import Footer from "./components/footer/footer";
 import Header from "./components/header/header";
 import Routing from "./routes/routing";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { history } from "./helpers";
 import { setAuthToken } from "./helpers";
 import "react-toastify/dist/ReactToastify.css";

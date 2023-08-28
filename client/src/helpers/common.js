@@ -16,3 +16,9 @@ export const isLoggedIn = () => {
 export const getUserId = () => {
   if (isLoggedIn()) return localStorage.getItem("userId");
 };
+
+export const clearData = () => {
+  localStorage.setItem("token", null);
+  localStorage.setItem("userId", null);
+  window.location.href = "/login";
+};

@@ -41,6 +41,7 @@ import ourBrandImg6 from "../../assets/images/Image 27.jpg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { clearData } from "../../helpers";
 
 const TredingCardMiniImages = [
   miniTrendImage1,
@@ -173,13 +174,18 @@ const HomePage = () => {
   const [eventToken, setEventToken] = useState(null);
   const getEvents = () => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/v1/event")
+      .get(process.env.REACT_APP_API_URL + "/v1/event/public")
       .then((response) => response.data)
       .then((data) => {
         console.log("data: ", data);
         setEvents(data.data);
       })
-      .catch((err) => console.log);
+      .catch((err) => {
+        console.log(err);
+        if (err?.response?.status === 403) {
+          clearData();
+        }
+      });
   };
   const getEventToken = () => {
     axios
@@ -189,7 +195,12 @@ const HomePage = () => {
         console.log("data: ", data);
         setEventToken(data.data);
       })
-      .catch((err) => console.log);
+      .catch((err) => {
+        console.log(err);
+        if (err?.response?.status === 403) {
+          clearData();
+        }
+      });
   };
 
   useEffect(() => {
@@ -271,7 +282,7 @@ const HomePage = () => {
           <img src={RightYellowIcon} alt="" />
           <p className="mb-0 mt-1">See All</p>
         </div>
-{/* 
+        {/* 
         <div className="mini_treding_cards mt-lg-5">
           <div className="row m-0">
             <div className="col-lg-2 p-0"></div>

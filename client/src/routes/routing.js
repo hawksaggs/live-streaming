@@ -10,6 +10,7 @@ import LivePage from "../pages/livePage/livePage";
 
 //history
 import { history } from "../helpers";
+import RouteGuard from "./RouteGuard";
 
 function Routing() {
   return (
@@ -19,9 +20,13 @@ function Routing() {
         <Route path="/dashboard/home" element={<DashboardHome />} />
         <Route
           path="/dashboard/home/control-room"
-          element={<DashboardHome controlRoom={true} />}
+          element={
+            <RouteGuard>
+              <DashboardHome controlRoom={true} />
+            </RouteGuard>
+          }
         />
-         <Route path="/host" element={<HostPage />} />
+        <Route path="/host" element={<HostPage />} />
         <Route path="/guests/:eventId" element={<HostPage guestsPage />} />
         <Route path="/dashboard/event" element={<DashboardEvent />} />
         <Route path="/register" element={<SignUpPage />} />

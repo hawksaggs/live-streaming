@@ -21,7 +21,7 @@ import CreateEvent from "../../components/createEvent/createEvent";
 import { useState, useEffect } from "react";
 import ControlRoom from "./controlRoom";
 import axios from "axios";
-import { history } from "../../helpers";
+import { clearData, handleError, history } from "../../helpers";
 
 let UpLiveImages = [
   image1,
@@ -83,12 +83,17 @@ const DashboardHome = ({ controlRoom }) => {
   };
   const getEvents = () => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/v1/event/public")
+      .get(process.env.REACT_APP_API_URL + "/v1/event")
       .then((response) => response.data)
       .then((data) => {
         setEvents(data.data);
       })
-      .catch((err) => console.log);
+      .catch((err) => {
+        console.log(err);
+        if (err?.response?.status === 403) {
+          clearData();
+        }
+      });
   };
   const getEventToken = () => {
     axios
@@ -97,7 +102,12 @@ const DashboardHome = ({ controlRoom }) => {
       .then((data) => {
         setEventToken(data.data);
       })
-      .catch((err) => console.log);
+      .catch((err) => {
+        console.log(err);
+        if (err?.response?.status === 403) {
+          clearData();
+        }
+      });
   };
 
   useEffect(() => {

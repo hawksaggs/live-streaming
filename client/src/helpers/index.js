@@ -1,3 +1,3 @@
 export * from "./fetch-wrapper";
 export * from "./history";
-export * from "./setAuthToken";
+export * from "./common";

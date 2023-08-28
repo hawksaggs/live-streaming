@@ -9,12 +9,18 @@ const getpublicEvents = async () => {
 };
 
 const getAll = async (actor) => {
+  const findOptions = {};
+  if(actor) findOptions.user = actor.id;
   // add system defined fields
-  return Event.find({ user: actor.id });
+  return Event.find(findOptions);
 };
 const getEvent = async (actor, eventId) => {
+  findOptions = {
+    _id: eventId,
+  };
+  if (actor) findOptions.user = actor.id;
   // add system defined fields
-  return Event.findOne({ _id: eventId, user: actor.id });
+  return Event.findOne(findOptions);
 };
 const createEvent = async (actor, eventBody) => {
   // add system defined fields
@@ -41,5 +47,5 @@ module.exports = {
   createEvent,
   updateEvent,
   deleteEvent,
-  getpublicEvents
+  getpublicEvents,
 };

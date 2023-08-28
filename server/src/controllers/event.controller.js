@@ -3,7 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const { eventService } = require("../services");
 
 const getpublicEvents = catchAsync(async (req, res) => {
-  const events = await eventService.getAll();
+  const events = await eventService.getpublicEvents();
 
   res.status(httpStatus.OK).send({ message: "Success", data: events });
 });
