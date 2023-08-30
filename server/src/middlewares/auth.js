@@ -33,12 +33,12 @@
 const jwt = require("../utils/jwt");
 
 const ignoreRoutes = [
-  "POST:/v1/auth/login",
-  "POST:/v1/auth/register",
-  "GET:/v1/events",
-  "GET:/v1/event",
-  "GET:/v1/meeting/token",
-  "GET:/v1/event/public",
+  "POST:/api/v1/auth/login",
+  "POST:/api/v1/auth/register",
+  "GET:/api/v1/events",
+  "GET:/api/v1/event",
+  "GET:/api/v1/meeting/token",
+  "GET:/api/v1/event/public",
 ];
 
 const checkToken = async (req, res, next) => {

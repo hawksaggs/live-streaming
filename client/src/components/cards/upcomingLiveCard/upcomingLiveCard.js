@@ -5,10 +5,17 @@ import "./upcomingLiveCard.css";
 const UpcomingLiveCard = ({ data }) => {
   const navigate = useNavigate();
   return (
-    <div className="upcoming_live_card" onClick={() => navigate('/guests/' + data.id)}>
+    <div
+      className="upcoming_live_card"
+      onClick={() => navigate("/guests/" + data.id)}
+    >
       <div className="card_section">
         <div className="position-relative">
-        <img src={`${process.env.REACT_APP_API_URL.replace('/api', '')}/static/images/${data?.image}`} className="card_img" alt=""/>
+          <img
+            src={`${process.env.REACT_APP_API_URL}/static/images/${data?.image}`}
+            className="card_img"
+            alt=""
+          />
           <div className="card_overlay"></div>
           <Button className="quick_view_btn">QUICK VIEW</Button>
         </div>
