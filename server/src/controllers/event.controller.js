@@ -50,11 +50,20 @@ const deleteEvent = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ message: "Success" });
 });
 
+const likeEvent = catchAsync(async (req, res) => {
+  const user = req?.user;
+
+  await eventService.likeEvent(user, req.params.eventId);
+
+  res.status(httpStatus.OK).send({ message: "Success" });
+});
+
 module.exports = {
   getAll,
   getEvent,
   createEvent,
   updateEvent,
   deleteEvent,
-  getpublicEvents
+  getpublicEvents,
+  likeEvent,
 };

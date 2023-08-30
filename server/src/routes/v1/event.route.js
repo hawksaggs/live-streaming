@@ -38,5 +38,6 @@ router
   .route("/:eventId")
   .put(upload.single("file"), eventController.updateEvent);
 router.route("/:eventId").delete(eventController.deleteEvent);
+router.route("/like/:eventId").post(eventController.likeEvent);
 
 module.exports = router;
