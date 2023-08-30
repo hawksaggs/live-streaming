@@ -1,11 +1,16 @@
 import { Button } from "react-bootstrap";
 import { CrossIcon } from "../../assets/icons";
 import "./createEvent.css";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) => {
+const CreateEvent = ({
+  handleClose,
+  showEventForm,
+  data,
+  updateEventsList,
+}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [scheduledDate, setScheduledDate] = useState("");
@@ -22,13 +27,8 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
       setScheduledTime(data.scheduledTime);
       setIsUpdate(true);
     }
-
   }, [data]);
   const [events, setEvents] = useState([]);
-
-
-
-
 
   function submitForm() {
     const formData = new FormData();
@@ -48,7 +48,7 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
 
     if (isUpdate) {
       config.url = process.env.REACT_APP_API_URL + "/v1/event/" + data._id;
-      config.method = "PUT"
+      config.method = "PUT";
     }
 
     axios
@@ -70,7 +70,6 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
         setScheduledTime("");
         setImageDetail(null);
         setImageUrl("");
-
       })
       .catch((error) => {
         console.log(error);
@@ -94,9 +93,10 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
       >
         <div className="event_heading d-flex align-items-center justify-content-between">
           <div className="">
-            <div className="title">Create Event</div>
+            <div className="title">{isUpdate ? "Update" : "Create"} Event</div>
             <div className="desc mt-2">
-              Add your product necessary information from here
+              {isUpdate ? "Update" : "Add"} your product necessary information
+              from here
             </div>
           </div>
 
@@ -193,7 +193,9 @@ const CreateEvent = ({ handleClose, showEventForm , data, updateEventsList }) =>
               </Button>
             </div>
             <div className="col-lg-6 ps-lg-4 mt-lg-0 mt-4 p-0 d-flex align-items-center justify-content-between">
-              <Button onClick={submitForm}>Add Event</Button>
+              <Button onClick={submitForm}>
+                {isUpdate ? "Update" : "Add"} Event
+              </Button>
             </div>
           </div>
         </div>
