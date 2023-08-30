@@ -18,7 +18,12 @@ import Hls from "hls.js";
 import { isLoggedIn } from "../../helpers";
 import * as punycode from "punycode";
 
-function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm }) {
+function ControlRoom({
+  setShowControlRoom,
+  data,
+  eventToken,
+  setShowEventForm,
+}) {
   const [activeKey, setActiveKey] = useState(1);
   const [participantCount, setParticipantCount] = useState(0);
   const chatContainerRef = useRef(null);
@@ -43,30 +48,28 @@ function ControlRoom({ setShowControlRoom, data, eventToken, setShowEventForm })
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages])
+  }, [messages]);
 
-const handleSendMessageOnEnter = (e) => {
+  const handleSendMessageOnEnter = (e) => {
+    if (e.key === "Enter") {
+      // Sending the Message using the publish method
+      publishRef.current(message, { persist: true });
+      // Clearing the message input
+      setMessage("");
+      scrollToBottom();
+    }
+  };
 
-
-  if (e.key === 'Enter') {
-    // Sending the Message using the publish method
-    publishRef.current(message, { persist: true });
-    // Clearing the message input
-    setMessage("");
+  useEffect(() => {
     scrollToBottom();
-  }
-};
+  }, [messages]);
 
-useEffect(() => {
-  scrollToBottom();
-}, [messages]);
-
-const scrollToBottom = () => {
-  if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  }
-};
-
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  };
 
   return (
     <div className="d_home_container w-100 mb-5 d_home_container_height">
@@ -211,63 +214,61 @@ const scrollToBottom = () => {
             </button>
           </div>
         </div> */}
-       
-       {/* new chat box */}
-       <div className="chat_product_box d-flex flex-column mt-5 mt-md-0 justify-content-between">
-  <div className="d-flex options">
-    <p
-      className={`m-0 option ${activeKey === 1 ? "active" : ""}`}
-      onClick={() => setActiveKey(1)}
-    >
-      Chat
-    </p>
-    <p
-      className={`m-0 option ms-4 ${activeKey === 2 ? "active" : ""}`}
-      onClick={() => setActiveKey(2)}
-    >
-      Products
-    </p>
-  </div>
-  
-  <div className="messages-container" ref={chatContainerRef}>
-    {messages.map((message, index) => (
-      <div className={`message ${index % 2 === 0 ? "even" : "odd"}`} key={index}>
-        <p className="upper_para">@{message.senderId}</p>
-        <p className="lower_para">{message.message}</p>
-      </div>
-    ))}
-  </div>
-  
-  <div className="d-flex align-items-center add-comment-section">
-    <input
-      type="text"
-      className="input_add_comment"
-      placeholder="Add Comment"
-      value={message}
-      onChange={(e) => {
-        setMessage(e.target.value);
-      }}
-      onKeyDown={handleSendMessageOnEnter}
-    />
-    <button
-      className="button_add_comment"
-      onClick={() => handleSendMessage()}
-    >
-      <img
-        src={YellowArrow}
-        alt=""
-        style={{ transform: "rotate(270deg)" }}
-        height={11}
-        width={19}
-      />
-    </button>
-  </div>
-</div>
 
+        {/* new chat box */}
+        <div className="chat_product_box d-flex flex-column mt-5 mt-md-0 justify-content-between">
+          <div className="d-flex options">
+            <p
+              className={`m-0 option ${activeKey === 1 ? "active" : ""}`}
+              onClick={() => setActiveKey(1)}
+            >
+              Chat
+            </p>
+            <p
+              className={`m-0 option ms-4 ${activeKey === 2 ? "active" : ""}`}
+              onClick={() => setActiveKey(2)}
+            >
+              Products
+            </p>
+          </div>
 
+          <div className="messages-container" ref={chatContainerRef}>
+            {messages.map((message, index) => (
+              <div
+                className={`message ${index % 2 === 0 ? "even" : "odd"}`}
+                key={index}
+              >
+                <p className="upper_para">@{message.senderId}</p>
+                <p className="lower_para">{message.message}</p>
+              </div>
+            ))}
+          </div>
 
-
-
+          <div className="d-flex align-items-center add-comment-section">
+            <input
+              type="text"
+              className="input_add_comment"
+              placeholder="Add Comment"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+              onKeyDown={handleSendMessageOnEnter}
+            />
+            <button
+              className="button_add_comment"
+              onClick={() => handleSendMessage()}
+            >
+              <img
+                src={YellowArrow}
+                alt=""
+                style={{ transform: "rotate(270deg)" }}
+                height={11}
+                width={19}
+              />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -445,8 +446,8 @@ function SpeakerView({
   const [joined, setJoined] = useState(null);
   //Get the method which will be used to join the meeting.
   //We will also get the participant list to display all participants
-  const { participants, meetingId, activeSpeakerId, localParticipant } =
-    useMeeting();
+  const { participants, localParticipant } = useMeeting();
+  console.log("participants: ", participants);
   const mMeeting = useMeeting({
     onMeetingJoined: () => {
       setJoined("JOINED");
