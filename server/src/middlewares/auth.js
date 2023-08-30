@@ -36,7 +36,7 @@ const ignoreRoutes = [
   "POST:/api/v1/auth/login",
   "POST:/api/v1/auth/register",
   "GET:/api/v1/events",
-  "GET:/api/v1/event",
+  // "GET:/api/v1/event",
   "GET:/api/v1/meeting/token",
   "GET:/api/v1/event/public",
 ];
