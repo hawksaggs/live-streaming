@@ -31,7 +31,7 @@ const router = express.Router();
 
 // router.route('/').post(auth, validate(createArtefact), prescriptionController.createArtefact);
 router.route("/").post(upload.single("file"), eventController.createEvent);
-router.route("/").get(eventController.getAll);
+router.route("/").get(auth.checkToken, eventController.getAll);
 router.route("/public").get(eventController.getpublicEvents);
 router.route("/:eventId").get(eventController.getEvent);
 router
