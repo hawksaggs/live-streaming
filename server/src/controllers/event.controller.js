@@ -10,6 +10,7 @@ const getpublicEvents = catchAsync(async (req, res) => {
 
 const getAll = catchAsync(async (req, res) => {
   const user = req?.user;
+  console.log(user);
   const events = await eventService.getAll(user);
 
   res.status(httpStatus.OK).send({ message: "Success", data: events });
@@ -49,14 +50,11 @@ const deleteEvent = catchAsync(async (req, res) => {
 
   res.status(httpStatus.OK).send({ message: "Success" });
 });
-
 const likeEvent = catchAsync(async (req, res) => {
-  const user = req?.user;
-
-  await eventService.likeEvent(user, req.params.eventId);
-
-  res.status(httpStatus.OK).send({ message: "Success" });
+  await eventService.likeEvent(req.params.eventId);
+  res.status(httpStatus.OK).send({ message: "Success" , eventId:req.params.eventId });
 });
+
 
 module.exports = {
   getAll,

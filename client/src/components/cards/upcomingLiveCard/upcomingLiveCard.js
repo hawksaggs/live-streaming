@@ -23,7 +23,6 @@ const UpcomingLiveCard = ({ data }) => {
           <img src={data?.user?.img} alt="" className="pe-3" />
           {data?.user?.name}
         </div>
-
         <div className="desc">{data?.description}</div>
 
         <div className="date_text">{data?.scheduledDate}</div>

@@ -19,7 +19,7 @@
   font-weight: normal;
   font-style: normal;
   color: #39331b;
-  padding-left: 60px;
+  padding-left: 120px;
   text-decoration: none;
 }
 
@@ -30,7 +30,9 @@
 .header_auth_btn a {
   margin-left: 100px !important;
 }
-
+.header_auth_btn .dashboardbtn{
+  margin-left: 330px !important;
+}
 .header_auth_btn button {
   width: 118px;
   height: 36px;
@@ -214,6 +216,8 @@
     padding-left: 24px;
     text-decoration: underline;
     margin-bottom: 16px;
+    padding: 14px 24px;
+    text-decoration: none;
   }
 
   .header_box .mobile_link_buttons button {

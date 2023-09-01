@@ -2,6 +2,7 @@ const express = require("express");
 const eventRoute = require("./event.route");
 const authRoute = require("./auth.route");
 const videoSdkRoute = require("./videosdk.route");
+const userRoute = require("./user.route");
 
 const router = express.Router();
 
@@ -17,6 +18,10 @@ const defaultRoutes = [
   {
     path: "/meeting",
     route: videoSdkRoute,
+  },
+  {
+    path: "/user",
+    route: userRoute,
   },
 ];
 

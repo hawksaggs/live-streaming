@@ -50,16 +50,16 @@ const UpcomingLiveHomePage = ({
           isControlRoomView ? "control_room_card" : "upcmg_home_card"
         }`}
       >
-        <div className="position-relative">
-        <img src={`${process.env.REACT_APP_API_URL}/static/images/${data?.image}`} className="main_img" alt=""/>
+        <div className="position-relative image-card-for-crtl">
+        <img
+            src={`${process.env.REACT_APP_API_URL}/static/images/${data?.image}`}
+            className="card_img img-fluid"
+            alt=""
+          /> 
           <div className="image_content">
             <div className="d-flex justify-content-between align-items-center">
-              {/*<Button>Scheduled</Button>*/}
-              {/*{!isControlRoomView && (*/}
-              {/*  <img src={MoreItemIcon} alt="" className="cursor_pointer" />*/}
-              {/*)}*/}
             </div>
-            {/*<p className="mb-0">Welcome to a Live Shopping Event</p>*/}
+        
           </div>
         </div>
 
@@ -139,6 +139,7 @@ const UpcomingLiveHomePage = ({
               </div>
             </>
           )}
+          <div className="desc_title">{data.title}</div>
           <div
             className={`${
               isControlRoomView ? "control_room_card_desc mb-3 pt-1" : "desc"

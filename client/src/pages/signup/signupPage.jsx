@@ -14,7 +14,7 @@ const SignUpPage = () => {
       .post(
         process.env.REACT_APP_API_URL + "/v1/auth/register",
         {
-          name: name,
+          fullName: name,
           username: email,
           password: password,
         },

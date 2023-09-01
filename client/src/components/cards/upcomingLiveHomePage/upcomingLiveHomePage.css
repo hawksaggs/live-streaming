@@ -18,6 +18,12 @@
   height: 209px;
 }
 
+.upcmg_home_card_container .image-card-for-crtl{
+  object-fit: cover;
+  width: 423px;
+  margin-right: 10px;
+}
+
 .control_room_card .detail_container {
   background-color: #efefef;
   width: 100%;
@@ -104,7 +110,15 @@
   color: #39331b;
   margin: 12px 0px;
 }
-
+.upcmg_home_card_container .desc_title{
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  text-align: left;
+  color: #39331b;
+  margin: 12px 0px;
+}
 .upcmg_home_card_container .image_content img {
   width: 40px;
 }

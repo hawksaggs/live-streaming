@@ -1,7 +1,24 @@
-@port=8000
+"rest-client.environmentVariables": {
+    "$shared": {
+        "version": "v1",
+        "prodToken": "foo",
+        "nonProdToken": "bar"
+    },
+    "local": {
+        "version": "v2",
+        "host": "localhost",
+        "token": "{{$shared nonProdToken}}",
+        "secretKey": "devSecret"
+    },
+    "production": {
+        "host": "example.com",
+        "token": "{{$shared prodToken}}",
+        "secretKey" : "prodSecret"
+    }
+}
 
 ### Register
-POST http://localhost:{{port}}/api/v1/auth/register
+POST http://localhost:{{port}}/v1/auth/register
 Content-Type: application/json
 
 {
@@ -11,7 +28,7 @@ Content-Type: application/json
 }
 
 ### Login
-POST http://localhost:{{port}}/api/v1/auth/login
+POST http://localhost:{{port}}/v1/auth/login
 Content-Type: application/json
 
 {
@@ -33,10 +50,6 @@ Content-Type: application/json
 
 ### Get Event List
 GET http://localhost:{{port}}/v1/event
-Content-Type: application/json
-
-### Get Event List
-GET http://localhost:{{port}}/api/v1/event/public
 Content-Type: application/json
 
 ### Get Event
@@ -69,9 +82,3 @@ Content-Type: application/json
 
 ### Validate Room
 GET http://localhost:{{port}}/v1/meeting/auqv-uhxc-0suu
-
-### Like Event
-POST http://localhost:{{port}}/api/v1/event/like/64eaf4dde3f4e4118c8a92a5
-Content-Type: application/json
-
-{}

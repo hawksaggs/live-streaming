@@ -6,6 +6,8 @@ import SoundIcon from "../../assets/icons/sound.svg";
 import Insta from "../../assets/icons/yellow_insta.svg";
 import Linkedin from "../../assets/icons/yellow_linkedin.svg";
 import Facebook from "../../assets/icons/yellow_facebook.svg";
+import Hart from "../../assets/icons/likeIcon.svg";
+import HartRed from "../../assets/icons/redlike.svg";
 import HostBanner from "../../assets/images/host_banner.png";
 import RightArrow from "../../assets/icons/right_qrrow.svg";
 import SellerImg from "../../assets/images/seller_profile.png";
@@ -155,6 +157,30 @@ function HostPage({ guestsPage }) {
     }
   };
 
+/// likes logics
+
+  const handellike = (e) => {
+    axios.post(process.env.REACT_APP_API_URL + "/v1/event/like/" + eventId).then((response) => {
+      localStorage.setItem("like", true);
+      localStorage.setItem("likeId", response.data.eventId);
+      checkifuserlike();
+    });
+  };
+
+
+    const checkifuserlike = () =>{
+      if (localStorage.getItem("like") === "true" && localStorage.getItem("likeId") === eventId) {
+        document.querySelector(".hart_icon").style.pointerEvents = "none";
+        document.querySelector(".hart_icon").src = HartRed;
+      }else{
+        document.querySelector(".hart_icon").style.pointerEvents = "auto";
+        document.querySelector(".hart_icon").src = Hart;
+      }
+    }
+    useEffect(() => {
+      checkifuserlike();
+    }, []);
+
   return (
     <div className="live_host_page">
       <div className="d-md-flex">
@@ -171,6 +197,14 @@ function HostPage({ guestsPage }) {
               />
             </div>
             <div className="banner_top_social_icons">
+            <img
+              src={Hart}
+              alt="Heart"
+              className="cursor_pointer hart_icon"
+              width={30}
+              onClick={(e) => handellike(e)}
+            />
+
               <img
                 src={Insta}
                 alt="Insta"

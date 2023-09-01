@@ -158,6 +158,29 @@ const DashboardHome = ({ controlRoom }) => {
                 })}
               </OwlCarousel>
             ) : null}
+         <div className="top_heading d-flex align-items-center justify-content-between my-5">
+    <div className="heading_name">
+        Learn how to get started with Netikash Live.
+    </div>
+</div>
+
+<OwlCarousel
+    className="owl-theme owl_carousel_1 owl_carousel_2"
+    {...options2}
+>
+    {LearnHowImages.map((v, i) => (
+        <div className="learn_img_container position-relative" key={i}>
+            <img
+                src={VideoPlayIcon}
+                className="video_icon"
+                alt=""
+                onClick={() => setShowVideoPopUp(true)}
+            />
+            <img src={v} alt="" className="main_img" />
+        </div>
+    ))}
+</OwlCarousel>
+
           </div>
         )}
       </div>
@@ -180,6 +203,8 @@ const DashboardHome = ({ controlRoom }) => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
+
+          
           <Modal.Header closeButton>
             {/* <Modal.Title id="contained-modal-title-vcenter">
             Modal heading

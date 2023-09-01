@@ -6,6 +6,7 @@ import SalesIcon from "../../assets/icons/salesIcon.svg";
 import LikesIcon from "../../assets/icons/likeIcon.svg";
 import ViewerIcon from "../../assets/icons/viewerIcon.svg";
 import YellowArrow from "../../assets/icons/downArrow.svg";
+import axios from "axios";
 import {
   Constants,
   MeetingProvider,
@@ -27,9 +28,10 @@ function ControlRoom({
   const [activeKey, setActiveKey] = useState(1);
   const [participantCount, setParticipantCount] = useState(0);
   const chatContainerRef = useRef(null);
+
   const [reports, setReports] = useState([
     // { image: ViewerIcon, counts: participantCount, category: "Viewer" },
-    { image: LikesIcon, counts: 458, category: "Likes" },
+    { image: LikesIcon, counts: data.like, category: "Likes" },
     { image: OrderIcon, counts: 56, category: "Order" },
     { image: SalesIcon, counts: 254, category: "Sales" },
   ]);
@@ -70,6 +72,20 @@ function ControlRoom({
         chatContainerRef.current.scrollHeight;
     }
   };
+
+  // get the host name
+  const [hostName, setHostName] = useState("");
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/v1/user/${localStorage.getItem("userId")}`)
+      .then((res) => {
+        setHostName(res.data.users.fullName);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
 
   return (
     <div className="d_home_container w-100 mb-5 d_home_container_height">
@@ -119,8 +135,8 @@ function ControlRoom({
               meetingId: data.meetingId,
               micEnabled: !!isLoggedIn(),
               webcamEnabled: !!isLoggedIn(),
-              // name: "Ayush's Org",
               mode: Constants.modes.CONFERENCE,
+              senderName: hostName,
             }}
             joinWithoutUserInteraction
             token={eventToken}
@@ -234,11 +250,12 @@ function ControlRoom({
 
           <div className="messages-container" ref={chatContainerRef}>
             {messages.map((message, index) => (
+              console.log("message: ", message),
               <div
                 className={`message ${index % 2 === 0 ? "even" : "odd"}`}
                 key={index}
               >
-                <p className="upper_para">@{message.senderId}</p>
+                <p className="upper_para">@{message.senderName}</p>
                 <p className="lower_para">{message.message}</p>
               </div>
             ))}

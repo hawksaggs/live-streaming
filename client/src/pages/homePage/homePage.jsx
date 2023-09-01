@@ -143,7 +143,10 @@ const optionsUpcoming = {
   ...options1,
   center: false,
   item: 6,
-  nav: true,
+  nav: false,
+  mouseDrag: false,
+  touchDrag: false,
+  pullDrag: false,
   smartSpeed: 200,
   navText: [`<img src=${LeftDarkIcon}>`, `<img src=${RightDarkIcon}>`],
   responsive: {
@@ -169,7 +172,6 @@ const TredingCardMini = ({ img }) => {
 };
 
 const HomePage = () => {
-  console.log("HomePage");
   const [events, setEvents] = useState([]);
   const [eventToken, setEventToken] = useState(null);
   const getEvents = () => {
@@ -177,7 +179,7 @@ const HomePage = () => {
       .get(process.env.REACT_APP_API_URL + "/v1/event/public")
       .then((response) => response.data)
       .then((data) => {
-        console.log("data: ", data);
+        data.data = data.data.slice(0, 6);
         setEvents(data.data);
       })
       .catch((err) => {
@@ -212,7 +214,6 @@ const HomePage = () => {
     fetchData();
   }, []);
 
-  console.log("events: ", events);
   return (
     <div className="homepage_container">
       <div className="homepage_searchbox">
@@ -267,6 +268,9 @@ const HomePage = () => {
           </div>
         ) : null}
       </div>
+      <div className="seemore-upcoming-event">
+            <Link to="/upcoming-events">See More</Link>
+          </div>
       <div className="trending_sec position-relative">
         <div className="d-flex align-items-center heading_container justify-content-between">
           <div className="heading">Trending Product</div>

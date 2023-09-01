@@ -40,6 +40,7 @@ const ignoreRoutes = [
   "POST:/api/v1/event/like",
   "GET:/api/v1/meeting/token",
   "GET:/api/v1/event/public",
+  "GET:/api/v1/user",
 ];
 
 const checkToken = async (req, res, next) => {

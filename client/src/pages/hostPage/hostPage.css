@@ -24,7 +24,9 @@
   outline: none;
   outline: 1px solid #007bff;
 }
-
+.hart_icon{
+  margin-right: 15px;
+}
 
 
 /*chat box css */

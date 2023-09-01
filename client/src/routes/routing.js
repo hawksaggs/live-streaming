@@ -47,6 +47,7 @@ import DashboardEvent from "../pages/dashboardEvent/dashboardEvent";
 import SignUpPage from "../pages/signup/signupPage";
 import LoginPage from "../pages/login/loginPage";
 import LivePage from "../pages/livePage/livePage";
+import Discover from "../pages/discover/discover";
 
 // history
 // import { createBrowserHistory } from "history";
@@ -69,6 +70,7 @@ function Routing() {
             }
           />
           <Route path="/host" element={<HostPage />} />
+          <Route path="/upcoming-events" element={<Discover />} />
           <Route path="/guests/:eventId" element={<HostPage guestsPage />} />
           <Route path="/dashboard/event" element={<DashboardEvent />} />
           <Route path="/register" element={<SignUpPage />} />

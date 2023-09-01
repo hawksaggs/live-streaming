@@ -64,16 +64,16 @@ const Header = ({ auth, logOut }) => {
                 </>
               ) : (
                 <>
-                  <Link to="#">Discover</Link>
+                  <Link to="/upcoming-events">Parcourir</Link>
                   <Link to="#" className="bold_text_500">
-                    Live Category
+                     Catégories
                   </Link>
-                  <Link to="#" className="bold_text_500">
+                  {/* <Link to="#" className="bold_text_500">
                     How to work
                   </Link>
                   <Link to="#" className="bold_text_500">
                     Blog
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </div>
@@ -83,9 +83,18 @@ const Header = ({ auth, logOut }) => {
                 <Button>Download</Button>
               ) : (
                 <>
-                  <Link to="/login">Log in</Link>
-                  <Link to="/register" className="signUpbtn">Sign Up</Link>
-                  {/*<Button>Sign Up</Button>{" "}*/}
+                {localStorage.getItem("userId") !== null && localStorage.getItem("userId") !== "unidentified" ? (
+                <Link to="/dashboard/home/control-room" className="signUpbtn dashboardbtn">
+                  Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link to="/login">Se Connecter</Link>
+                  <Link to="/register" className="signUpbtn">
+                    S'Inscrire
+                  </Link>
+                </>
+              )}
                 </>
               )}
             </div>
@@ -124,20 +133,20 @@ const Header = ({ auth, logOut }) => {
                   ) : (
                     <>
                       <Link
-                        to="#"
+                        to="/upcoming-events"
                         onClick={() => setShowMobileHeader(false)}
                       >
-                        Discover
+                        Parcourir
                       </Link>
                       <Link to="#" className="bold_text_500">
-                        Live Category
+                      Catégories
                       </Link>
-                      <Link to="#" className="bold_text_500">
+                      {/* <Link to="#" className="bold_text_500">
                         How to work
                       </Link>
                       <Link to="#" className="bold_text_500">
                         Blog
-                      </Link>
+                      </Link> */}
                     </>
                   )}
                   <div className="mt-4">
@@ -145,9 +154,19 @@ const Header = ({ auth, logOut }) => {
                     {window.location.pathname === "/live-host" ? (
                       <Button>Download</Button>
                     ) : (
+                         <>
+                      {localStorage.getItem("userId") !== null && localStorage.getItem("userId") !== "unidentified" ? (
+                      <Link to="/dashboard/home/control-room" className="signUpbtn dashboardbtn">
+                        Dashboard
+                      </Link>
+                    ) : (
                       <>
-                        <Link to="#">Log in</Link>
-                        <Button>Sign Up</Button>{" "}
+                        <Link to="/login">Se Connecter</Link>
+                        <Link to="/register" className="signUpbtn">
+                          S'Inscrire
+                        </Link>
+                      </>
+                    )}
                       </>
                     )}
                   </div>
@@ -284,7 +303,7 @@ const Header = ({ auth, logOut }) => {
                         <p>Home</p>
                       </Link>
                     </div>
-                    <div className={`link_item`}>
+                    {/* <div className={`link_item`}>
                       <Link
                         to="/dashboard/event"
                         onClick={() => setShowMobileHeader(false)}
@@ -292,7 +311,7 @@ const Header = ({ auth, logOut }) => {
                         <img src={EventIcon} alt="" />
                         <p>Event</p>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className={`link_item`}>
                       <Link to="#" onClick={() => setShowMobileHeader(false)}>
                         <img src={SettingIcon} alt="" />
