@@ -77,15 +77,18 @@ function ControlRoom({
   const [hostName, setHostName] = useState("");
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/v1/user/${localStorage.getItem("userId")}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/v1/user/${localStorage.getItem(
+          "userId"
+        )}`
+      )
       .then((res) => {
-        setHostName(res.data.users.fullName);
+        setHostName(res.data?.users?.fullName);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
 
   return (
     <div className="d_home_container w-100 mb-5 d_home_container_height">
@@ -130,28 +133,26 @@ function ControlRoom({
               </div>
             ))}
           </div>
-          <MeetingProvider
-            config={{
-              meetingId: data.meetingId,
-              micEnabled: !!isLoggedIn(),
-              webcamEnabled: !!isLoggedIn(),
-              mode: Constants.modes.CONFERENCE,
-              senderName: hostName,
-            }}
-            joinWithoutUserInteraction
-            token={eventToken}
-          >
-            {isLoggedIn() ? (
+          {isLoggedIn() && hostName ? (
+            <MeetingProvider
+              config={{
+                meetingId: data.meetingId,
+                micEnabled: true,
+                webcamEnabled: true,
+                mode: Constants.modes.CONFERENCE,
+                name: hostName,
+              }}
+              joinWithoutUserInteraction
+              token={eventToken}
+            >
               <SpeakerView
                 setParticipantCount={setParticipantCount}
                 messages={messages}
                 publishRef={publishRef}
                 setMessages={setMessages}
               />
-            ) : (
-              <ViewerView />
-            )}
-          </MeetingProvider>
+            </MeetingProvider>
+          ) : null}
 
           {/*Stream Screen*/}
           {/*<div className="stream_select_box">*/}
@@ -249,16 +250,20 @@ function ControlRoom({
           </div>
 
           <div className="messages-container" ref={chatContainerRef}>
-            {messages.map((message, index) => (
-              console.log("message: ", message),
-              <div
-                className={`message ${index % 2 === 0 ? "even" : "odd"}`}
-                key={index}
-              >
-                <p className="upper_para">@{message.senderName}</p>
-                <p className="lower_para">{message.message}</p>
-              </div>
-            ))}
+            {messages.map(
+              (message, index) => (
+                console.log("message: ", message),
+                (
+                  <div
+                    className={`message ${index % 2 === 0 ? "even" : "odd"}`}
+                    key={index}
+                  >
+                    <p className="upper_para">@{message.senderName}</p>
+                    <p className="lower_para">{message.message}</p>
+                  </div>
+                )
+              )
+            )}
           </div>
 
           <div className="d-flex align-items-center add-comment-section">

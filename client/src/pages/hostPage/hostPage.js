@@ -288,7 +288,7 @@ function HostPage({ guestsPage }) {
       <div className="messages-container" ref={chatContainerRef}>
         {messages.map((message, index) => (
           <div className={`message ${index % 2 === 0 ? "even" : "odd"}`} key={index}>
-            <p className="sender">@{message.senderId}</p>
+            <p className="sender">@{message.senderName}</p>
             <p className="message-text">{message.message}</p>
           </div>
         ))}
